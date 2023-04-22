@@ -1,6 +1,6 @@
 <template>
   <div>
-    示例组件1
+    示例组件1111
   </div>
 </template>
 <script>
