@@ -28,44 +28,6 @@ const router = new VueRouter({
   base: window.__MICRO_APP_BASE_ROUTE__ || "/",
   routes,
 });
-// import microApp from "@micro-zoe/micro-app";
-
-// microApp.start();
-
-// Vue.config.productionTip = false;
-
-
-// main.js
-
-// const App = new Vue({
-//   el: '#app',
-//   components: {
-//     Message,
-//   },
-//   template: `
-//     <div id="app">
-//       <button @click="showMessage">Show Message</button>
-//     </div>
-//   `,
-//   methods: {
-//     showMessage() {
-//       this.$refs.message.success('Hello World!');
-//     },
-//   },
-//   mounted() {
-//     const message = this.$refs.message;
-//     message.success = function (text, duration = 2000) {
-//       message.$emit('show', { type: 'success', text, duration });
-//     };
-//     message.error = function (text, duration = 2000) {
-//       message.$emit('show', { type: 'error', text, duration });
-//     };
-//     message.warning = function (text, duration = 2000) {
-//       message.$emit('show', { type: 'warning', text, duration });
-//     };
-//   },
-// });
-
 new Vue({
   router,
   store,
