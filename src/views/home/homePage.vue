@@ -14,7 +14,7 @@
         >
           <el-submenu
             :index="'/' + item.path"
-            v-for="(item, index) in routes"
+            v-for="(item, index) in routerList"
             :key="index"
           >
             <template slot="title">
@@ -45,13 +45,18 @@
 </template>
 <script>
 import routes from "@/utils/menu";
+import routerList from "@/router/index.js";
+
 export default {
   data() {
     return {
+      routerList,
       routes: routes.menu,
     }
   },
   mounted() {
+    console.log(routerList,'路由')
+    console.log(routes)
 
   },
   computed: {
