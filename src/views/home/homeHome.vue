@@ -1,6 +1,6 @@
 <template>
-  <div class="wrap">
-    示例组件2222
+  <div>
+    首页
   </div>
 </template>
 <script>
@@ -22,9 +22,5 @@ export default {
 }
 </script>
 <style scoped>
-  .wrap{
-    width: 100%;
-    height: calc(100% - 50px);
-    background-color: rgb(175, 251, 104);
-  }
+
 </style>
