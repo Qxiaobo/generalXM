@@ -15,11 +15,11 @@ export default new Vuex.Store({
   state: {
     navList: [
       {
-        path: "",
+        path: "home",
         title: "首页"
       },
     ],
-    currentNav: ""
+    currentNav: "home"
   },
   getters: {
   },

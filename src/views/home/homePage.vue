@@ -13,16 +13,11 @@
           router
         >
           <el-submenu
-            :index="'/' + item.path"
+            :index="'/' + item.name"
             v-for="(item, index) in routerList"
             :key="index"
           >
             <template slot="title">
-              <!-- <img
-                :src="require('@/assets/icon/' + item.icon + '.png')"
-                alt=""
-                class="menu-img"
-              /> -->
               <span slot="title" class="menu-title">{{ item.title }}</span>
             </template>
             <el-menu-item
@@ -43,9 +38,8 @@
             <template v-for="(i, j) in navList">
               <div :key="j" :class="currentNav == i.path ? 'currentNav' : 'everyNav'" @click="clickNav(i.path)">
                 {{ i.title }}
-                <div class="closeWrap" v-if="i.path">
-                  <img src="@/assets/icon/guanbi.png" alt="" class="imgUnactive">
-                  <img src="@/assets/icon/guanbi (1).png" alt="" class="imgActive" @click.stop="closeNav(j)">
+                <div class="closeWrap" v-if="i.path!='home'">
+                  <i class="iconfont icon-guanbi imgActive" @click.stop="closeNav(j)"></i>
                 </div>
               </div>
             </template>
@@ -163,21 +157,15 @@ export default {
 .closeWrap {
   width: 20px;
   height: 20px;
+  text-align: center;
+  line-height: 20px;
   position: absolute;
   right: -10px;
   top: -10px;
 
 }
-
-.imgUnactive {
-  width: 20px;
-  height: 20px;
-}
-
 .imgActive {
-  display: none;
-  width: 20px;
-  height: 20px;
+  font-size: 20px;
 }
 
 .closeWrap:hover {
