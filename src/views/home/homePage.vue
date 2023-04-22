@@ -27,6 +27,7 @@
             </template>
             <el-menu-item
               :index="'/' + j.path"
+              @click="toEveryRouter(j)"
               :title="j.title"
               v-for="(j, i) in item.children"
               :key="i"
@@ -36,6 +37,7 @@
           </el-submenu>
         </el-menu>
       </el-aside>
+      
         <el-main>
           <div class="navWrap">
             <template v-for="(i, j) in navList">
