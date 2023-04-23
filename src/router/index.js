@@ -16,17 +16,32 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
-    name: 'homePage',
-    title:'傅红福',
+    path:"/",
+    name:"home",
+    title:'首页',
     component: () => import('../views/home/homePage'),
     redirect: '/home',
     children:[
       {
+        path:'home',
+        name:'home',
+        title:'首页组件',
+    component:()=>import("../views/home/homeHome"),
+      }
+    ]
+  },
+  {
+    path: '/',
+    name: 'homePage',
+    title:'傅红福',
+    component: () => import('../views/home/homePage'),
+    children:[
+      {
         path:'comT',
         name:'comT',
-        title:'组件一',
-        component:()=>import("../views/comT/comT")
+        title:'傅红福组件一',
+        component:()=>import("../views/comT/comT"),
+        
       },
     ]
   },
@@ -39,7 +54,7 @@ const routes = [
       {
         path:'com1',
         name:'com1',
-        title:'组件一',
+        title:'刘澳波组件一',
         component:()=>import("../views/com/comPage")
       }
     ]

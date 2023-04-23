@@ -1,7 +1,8 @@
 <template>
   <div>
     首页
-
+    <i class="iconfont icon-guanbi"></i>
+    
   </div>
 </template>
 <script>
