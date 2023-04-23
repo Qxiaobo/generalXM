@@ -1,6 +1,8 @@
 <template>
   <div class="wrap">
     示例组件1111
+    <i class="iconfont icon-wenda"></i>
+
   </div>
 </template>
 <script>
