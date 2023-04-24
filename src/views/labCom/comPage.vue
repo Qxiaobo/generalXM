@@ -92,11 +92,12 @@ export default {
 }
 .wrap {
   width: 100%;
-  height: calc(100% - 50px);
+  height: calc(100% - 52px);
   /* margin-top: 10px; */
   padding: 10px;
   /* overflow-x: hidden; */
   /* background-color: aquamarine; */
+  box-sizing: border-box;
 }
 
 .el-tag+.el-tag {

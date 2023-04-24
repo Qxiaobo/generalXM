@@ -24,7 +24,8 @@ export default {
 <style scoped>
   .wrap{
     width: 100%;
-    height: calc(100% - 50px);
+    height: calc(100% - 52px);
     background-color: rgb(175, 251, 104);
+    box-sizing: border-box;
   }
 </style>
