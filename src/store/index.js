@@ -1,3 +1,11 @@
+/*
+ * @Author: liuaobo 3376679936@qq.com
+ * @Date: 2023-04-23 14:26:40
+ * @LastEditors: liuaobo 3376679936@qq.com
+ * @LastEditTime: 2023-04-24 11:44:55
+ * @FilePath: \lab-project\src\store\index.js
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ */
 import Vue from 'vue'
 import Vuex from 'vuex'
 
@@ -13,6 +21,7 @@ export default new Vuex.Store({
     })
   ],
   state: {
+    labTags:[],//动态路由
     navList: [
       {
         path: "home",
@@ -51,6 +60,12 @@ export default new Vuex.Store({
     clickEveryNav(state, payload){
       console.log(payload, "点击的面包屑路径");
       state.currentNav = payload
+    },
+    //lab页面的标签确定保存
+    labSaveTags(state, payload){
+      console.log(payload, "lab页面的标签确定保存")
+      state.labTags = payload
+      window.localStorage.setItem("labTags",JSON.stringify(payload))
     }
   },
   actions: {
