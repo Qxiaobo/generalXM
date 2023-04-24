@@ -9,25 +9,48 @@
     </el-input>
     <el-button v-else class="button-new-tag" size="small" @click="showInput">+ New Tag</el-button>
     <el-button type="primary" size="small" @click="confirmSave">确定</el-button>
-
+    <el-card class="box-card">
+      <CleanForm :tableOptionWidth="400" :searShow="false" :showIndex="true" :showColumnHandle="false"
+        :showColumnSetting="false" :showCheckbox="false" :field-list="headList" :api="getFromApi01"
+        :queryParam="queryDetailParam" ref="queryStaSumDetails" :page="false" :dialogPage="true">
+      </CleanForm>
+    </el-card>
   </div>
 </template>
 <script>
-// import LabTags from '@/components/addTag/index.vue'
+import '@/mock/labMock/index.js'
+import { getFromApi01 } from '@/api/labApi/fromApi.js'
 export default {
   name: 'labComPage',
   components: {
-
+    // getFromApi01
   },
   data() {
     return {
+      getFromApi01,
       dynamicTags: JSON.parse(localStorage.getItem('labTags')) || this.$store.state.labTags || [],
       inputVisible: false,
-      inputValue: ''
+      inputValue: '',
+      queryDetailParam:{},
+      headList: [
+        {
+          name: "姓名",
+          value: "batchName",
+          noSort: true
+        },
+        { name: "国家", value: "unitCode", noSort: true, },
+        { name: "地区", value: "areaCode", noSort: true },
+        { name: "开始时间", value: "validTime", noSort: true },
+        { name: "出发时间", value: "buyTime", noSort: true },
+        { name: "总额", value: "subsidyEstimate", noSort: true },
+        { name: "一月流量", value: "month1", noSort: true },
+        { name: "二月流量", value: "month2", noSort: true },
+      ]
     }
   },
-  mounted() {
-
+  async mounted() {
+    const res = await getFromApi01()
+    console.log(res)
   },
   computed: {
 
@@ -64,6 +87,9 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+.box-card{
+  margin-top: 10px;
+}
 .wrap {
   width: 100%;
   height: calc(100% - 50px);

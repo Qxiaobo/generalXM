@@ -1,11 +1,4 @@
-/*
- * @Author: liuaobo 3376679936@qq.com
- * @Date: 2023-04-22 15:50:13
- * @LastEditors: liuaobo 3376679936@qq.com
- * @LastEditTime: 2023-04-24 09:55:32
- * @FilePath: \lab-project\src\main.js
- * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
- */
+
 import Vue from "vue";
 import App from "./App.vue";
 import routes from "./router";
@@ -20,6 +13,9 @@ import VScaleScreen from 'v-scale-screen';
 
 import VueParticles from 'vue-particles'
 Vue.use(VueParticles) 
+
+import componentsTools from '@/components/index.js';
+Vue.use(componentsTools);
 
 Vue.component('v-scale-screen', {
   name: 'v-scale-screen',

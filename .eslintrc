@@ -1,0 +1,15 @@
+{
+  "rules": {
+    "no-param-reassign": ["error", { "props": false }]
+  },
+  "ignorePatterns": ["cleanFrom/","api/","index.js","src/"],
+  "overrides": [
+    {
+      "files": ["*.js"],
+      "rules": {
+        "header/header": [2, "ignore"]
+      }
+    }
+  ]
+
+}
