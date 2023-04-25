@@ -66,7 +66,10 @@
             
           </el-form-item>
           <el-form-item>
-            <button class="btn-login" @click="login">登录</button>
+            <button class="btn-login"  v-debounce:login="['event', 'login']"
+    :debounceTime="1000"
+    :debounceType="'click'" >登录</button>
+    <!-- @click="login" -->
             <!-- <div class="loginBtn"   @click="login">
       <input type="text" placeholder="登录">
       <span class="bottom"></span>
@@ -128,14 +131,22 @@ export default {
     };
   },
   methods: {
+    // 在vue2中写一个节流函数
     // 实现登陆
+    
     async login(event) {
       // 阻止默认事件, 提交表单
-      event.preventDefault();
+      console.log(event)
+      // event.preventDefault();
+      // this.throttle(console.log('点击'), 1000)
+
+
+
+      console.log('点击')
       // 1. 绑定事件函数
       // 2. 表单校验
-      this.$refs.loginRef.validate(async (valid) => {
-        if (!valid) return; // 校验失败
+      // this.$refs.loginRef.validate(async (valid) => {
+        // if (!valid) return; // 校验失败
         // 3.1 校验通过，发送请求
         // console.log('ok')
         // const res  = await doLogin(this.loginForm)
@@ -171,7 +182,7 @@ export default {
           } else {
             this.$message.error('验证码错误')
           }
-      });
+      // });
     },
     handleCanvas() {
       this.draw(this.yanzheng_arr);
@@ -196,7 +207,7 @@ export default {
         // console.log(this.show_num,'this.show_num')
         var x = 10 + i * 15; //文字在canvas上的x坐标
         var y = 30 + Math.random() * 8; //文字在canvas上的y坐标
-        context.font = "bold 52px 微软雅黑";
+        context.font = "bold 36px 微软雅黑";
         context.translate(x, y);
         context.rotate(deg);
         context.fillStyle = this.randomColor();
