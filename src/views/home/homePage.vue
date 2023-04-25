@@ -3,6 +3,10 @@
     <div class="headerTop">
       M78星云管理系统
     </div>
+<!-- <div class="glass-container" id="glass">
+
+</div> -->
+
     <el-container style="position: relative;">
       <el-header height="100px" style="overflow-y: hidden;">
           <vue-particles class="par-box"  color="#fff" :particleOpacity="0.7" :particlesNumber="300" shapeType="circle"
@@ -82,6 +86,26 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+
+// .glass-container{
+//   position: absolute;
+//   top: -10px;
+//   left: 0;
+//     width: 100%;
+//     height: 100px;
+//     color: white;
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     gap: 20px;
+//     border-radius: 10px;
+//     backdrop-filter: blur(5px);
+//     background-color: rgba(0,191,255, 0.075);
+//     box-shadow: rgba(0, 0, 0, 0.3) 2px 8px 8px;
+//     border: 2px rgba(255,255,255,0.4) solid;
+//     border-bottom: 2px rgba(40,40,40,0.35) solid;
+//     border-right: 2px rgba(40,40,40,0.35) solid;
+// }
 .par-box{
   z-index: -1;
 }
@@ -99,7 +123,7 @@ export default {
     width: 100%;
     height: 100px;
     background: rgb(126,119,246);
-    background: linear-gradient(256deg, rgba(126,119,246,1) 0%, rgba(188,86,223,1) 35%, rgba(0,212,255,1) 100%);
+    // background: linear-gradient(256deg, rgba(126,119,246,1) 0%, rgba(188,86,223,1) 35%, rgba(0,212,255,1) 100%);
     font-family: chuanqi;
     font-size: 68px;
     line-height: 100px;
@@ -114,15 +138,18 @@ export default {
     // position: absolute;
     // top: 100%;
     // left: 0;
-    width: 100px;
+    width: 160px;
     height: 60px;
-    background: url('https://3o.hk/images/2023/04/24/c3115fc4-4b6f-47b6-a001-4922cd00f373.png');
+    // background: #000;
+    background-image: url('https://3o.hk/images/2023/04/24/c3115fc4-4b6f-47b6-a001-4922cd00f373.png') !important;
+    background-size: 100% 100%;
   }
 
 
 .el-aside {
   background-color: #D3DCE6;
-  height: calc(100vh - 116px);
+  // height: 100vh;
+  // height: calc(100vh - 116px);
 }
 
 .el-main {

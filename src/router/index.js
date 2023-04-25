@@ -74,8 +74,16 @@ const routes = [
       {
         path: "labCom",
         name: "labCom",
-        title: "刘澳波组件一",
-        component: () => import("../views/labCom/comPage"),
+        // labCom: "labCom",
+        title: "表格展示",
+        component:  () => import("../views/labCom/cleanForm/index.vue")
+      },
+      {
+        path: "qrCode",
+        name: "qrCode",
+        // labCom: "qrCode",
+        title: "二维码生成",
+        component: () => import("../views/labCom/qrCode/index.vue"),
       },
     ],
   },

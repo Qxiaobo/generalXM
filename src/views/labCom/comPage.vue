@@ -1,25 +1,24 @@
 
 <template>
   <div class="wrap">
-    <el-tag :key="tag" v-for="tag in dynamicTags" closable :disable-transitions="false" @close="handleClose(tag)">
-      {{ tag }}
+    <el-tag style="cursor: pointer;" :key="index" v-for="(tag,index) in dynamicTags" @click="clickTag(tag.path)" closable :disable-transitions="false" @close="handleClose(tag)">
+      {{ tag.name }}
     </el-tag>
+    <!-- <el-button size="small"  class="tag-btn" :key="tag" v-for="tag in dynamicTags" @click="clickTag()" closable :disable-transitions="false" @close="handleClose(tag)">
+      {{ tag }}
+    </el-button> -->
     <el-input class="input-new-tag" v-if="inputVisible" v-model="inputValue" ref="saveTagInput" size="small"
       @keyup.enter.native="handleInputConfirm" @blur="handleInputConfirm">
     </el-input>
     <el-button v-else class="button-new-tag" size="small" @click="showInput">+ New Tag</el-button>
-    <el-button type="primary" size="small" @click="confirmSave">确定</el-button>
-    <el-card class="box-card">
-      <CleanForm :tableOptionWidth="400" :searShow="false" :showIndex="true" :showColumnHandle="false"
-        :showColumnSetting="false" :showCheckbox="false" :field-list="headList" :api="getFromApi01"
-        :queryParam="queryDetailParam" ref="queryStaSumDetails" :page="false" :dialogPage="true">
-      </CleanForm>
-    </el-card>
+    <el-button type="primary" size="small" @click="confirmSave" style="margin-top: 100px;">确定</el-button>
+    <!-- This was made with GlassGenerator.netlify.app -->
+    <router-view />
+    
   </div>
+  
 </template>
 <script>
-import '@/mock/labMock/index.js'
-import { getFromApi01 } from '@/api/labApi/fromApi.js'
 export default {
   name: 'labComPage',
   components: {
@@ -27,25 +26,10 @@ export default {
   },
   data() {
     return {
-      getFromApi01,
       dynamicTags: JSON.parse(localStorage.getItem('labTags')) || this.$store.state.labTags || [],
       inputVisible: false,
       inputValue: '',
-      queryDetailParam:{},
-      headList: [
-        {
-          name: "姓名",
-          value: "batchName",
-          noSort: true
-        },
-        { name: "国家", value: "unitCode", noSort: true, },
-        { name: "地区", value: "areaCode", noSort: true },
-        { name: "开始时间", value: "validTime", noSort: true },
-        { name: "出发时间", value: "buyTime", noSort: true },
-        { name: "总额", value: "subsidyEstimate", noSort: true },
-        { name: "一月流量", value: "month1", noSort: true },
-        { name: "二月流量", value: "month2", noSort: true },
-      ]
+   
     }
   },
   async mounted() {
@@ -82,13 +66,21 @@ export default {
       } catch (error) {
         this.$message.error('保存失败')
       }
-    }
+    },
+    clickTag(i){
+      console.log(i)
+      console.log('row');
+      this.$router.push(`${i}`)
+    },
   },
 }
 </script>
 <style lang="scss" scoped>
+/* This was made with GlassGenerator.netlify.app */ 
+
 .box-card{
   margin-top: 10px;
+  
 }
 .wrap {
   width: 100%;

@@ -35,6 +35,7 @@ getMultipleSelection : {Function()} 获取表格多行选中的数据 } * @versi
         <el-table
           v-loading="loading"
           ref="crudForm"
+          :row-key="getRowKey"
           :data="tableData"
           :summary-method="(e) => totalValue"
           :show-summary="totalValue.length === 0 ? false : true"
@@ -52,7 +53,6 @@ getMultipleSelection : {Function()} 获取表格多行选中的数据 } * @versi
             type="index"
             width="50"
             align="center"
-            :render-header="renderHeader"
           />
           <el-table-column
             v-if="showCheckbox"
@@ -61,9 +61,13 @@ getMultipleSelection : {Function()} 获取表格多行选中的数据 } * @versi
             align="center"
           />
 
-          <template  v-for="(item, index) in fieldList.filter((item) => !item.hidden)">
+          <template
+            v-for="(item, index) in fieldList.filter((item) => !item.hidden)"
+          >
+            <!-- align="center" -->
+            :render-header="renderHeader"
             <el-table-column
-            v-if="item.show"
+              v-if="item.show"
               :key="index"
               :label="item.name"
               :prop="item.value"
@@ -353,7 +357,7 @@ export default {
         query: {
           // 查询条件
           current: 1, // 当前页
-          size: 20, // 每页条数
+          size: 10, // 每页条数
         },
       },
       pazeSizesCount1: [10, 20, 30, 40, 50, 100],
@@ -402,21 +406,23 @@ export default {
     });
   },
   methods: {
-
-       // 表头部重新渲染
-		renderHeader(h, { column, $index }) {
-			// 新建一个 span
-			let span = document.createElement('span');
-			// 设置表头名称
-			span.innerText = column.label;
-			// 临时插入 document
-			document.body.appendChild(span);
-			// 重点：获取 span 最小宽度，设置当前列，注意这里加了 20，字段较多时还是有挤压，且渲染后的 div 内左右 padding 都是 10，所以 +20 。（可能还有边距/边框等值，需要根据实际情况加上）
-			column.minWidth = span.getBoundingClientRect().width + 20;
-			// 移除 document 中临时的 span
-			document.body.removeChild(span);
-			return h('span', column.label);
-		},
+    getRowKey(row) {
+      return row.id;
+    },
+    // 表头部重新渲染
+    renderHeader(h, { column, $index }) {
+      // 新建一个 span
+      let span = document.createElement("span");
+      // 设置表头名称
+      span.innerText = column.label;
+      // 临时插入 document
+      document.body.appendChild(span);
+      // 重点：获取 span 最小宽度，设置当前列，注意这里加了 20，字段较多时还是有挤压，且渲染后的 div 内左右 padding 都是 10，所以 +20 。（可能还有边距/边框等值，需要根据实际情况加上）
+      column.minWidth = span.getBoundingClientRect().width + 10;
+      // 移除 document 中临时的 span
+      document.body.removeChild(span);
+      return h("span", column.label);
+    },
     // 分页width
     watchSize() {
       // let _this = this;
@@ -468,6 +474,7 @@ export default {
         api(this.handleParams())
           .then((res) => {
             // loadingInstance.close();
+            console.log(res.data);
             this.loading = false;
             if (res.code === "000000") {
               const d = res.data;
