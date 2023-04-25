@@ -88,6 +88,14 @@ const routes = [
         icon:'erweima',
         component: () => import("../views/labCom/qrCode/index.vue"),
       },
+      {
+        path: "verificationCode",
+        name: "verificationCode",
+        // labCom: "qrCode",
+        title: "登录页面",
+        icon:'jinrongxianxingge-',
+        component: () => import("@/views/labCom/verificationCode/index.vue"),
+      },
     ],
   },
 ];

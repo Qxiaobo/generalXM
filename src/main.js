@@ -34,7 +34,7 @@ const router = new VueRouter({
   routes,
 });
 let sp = document.createElement('script');
-sp.src = '//at.alicdn.com/t/c/font_4032346_k53ysbi6zy.js';
+sp.src = '//at.alicdn.com/t/c/font_4032346_rlqm6ad44z.js';
 document.body.appendChild(sp);
 new Vue({
   router,

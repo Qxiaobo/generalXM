@@ -1,18 +1,23 @@
 <template>
-  <div>
+  <div style="height: 790px;" >
     首页
     <i class="iconfont icon-guanbi"></i>
-
   </div>
 </template>
 <script>
 export default {
   data() {
-    return {};
+    return {
+
+    };
   },
-  mounted() {},
+  mounted() {
+
+  },
   computed: {},
-  methods: {},
+  methods: {
+
+  },
 };
 </script>
 <style scoped>
