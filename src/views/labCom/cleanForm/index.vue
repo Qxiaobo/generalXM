@@ -2,7 +2,7 @@
   <div>
     <el-card class="box-card">
       <CleanForm
-        :tableOptionWidth="400"
+        :tableOptionWidth="200"
         :showCheckbox="true"
         :searShow="true"
         :showIndex="true"

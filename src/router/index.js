@@ -68,7 +68,8 @@ const routes = [
   {
     path: "/",
     name: "liuaobo",
-    title: "刘澳波",
+    title: "点点VS叉叉--lab",
+    icon:'aichong02',
     component: () => import("../views/home/homePage"),
     children: [
       {
@@ -76,6 +77,7 @@ const routes = [
         name: "labCom",
         // labCom: "labCom",
         title: "表格展示",
+        icon:'biaoge1',
         component:  () => import("../views/labCom/cleanForm/index.vue")
       },
       {
@@ -83,6 +85,7 @@ const routes = [
         name: "qrCode",
         // labCom: "qrCode",
         title: "二维码生成",
+        icon:'erweima',
         component: () => import("../views/labCom/qrCode/index.vue"),
       },
     ],

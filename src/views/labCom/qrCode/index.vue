@@ -1,5 +1,5 @@
 <template>
-  <div style="text-align: center; margin-top: 20px;">
+  <div style="text-align: center; margin-top: 20px; height: 790px;">
     <!-- <p>二维码</p>  -->
     <button @click="doclick" class="custom-btn btn-3"  style="margin-bottom: 20px;" >
       <span>二维码</span>
