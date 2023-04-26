@@ -1,17 +1,23 @@
 <template>
   <div class="wrap">
-    <el-table
+    <!-- <object  data="@/assets/images/xlt.svg" width="100%" height="100%" type="image/svg+xml" style="display:block;width:330px;height:240px">  
+       
+      <param name="src" value="@/assets/images/xlt.svg" >
+</object> -->
+<!-- <img src="@/assets/images/xlt.svg" alt="" type="image/svg+xml"> -->
+<!-- <iframe id="iframeSvg" src="@/assets/images/xlt.svg"></iframe> -->
+    <!-- <el-table
       :data="tableData"
       style="width: 100%">
       <el-table-column
         prop="date"
-        label="日期"
-        width="180">
+        label="日期到期了大家撒旦好看的哈空间"
+        >
       </el-table-column>
       <el-table-column
         prop="name"
         label="姓名"
-        width="180">
+        >
       </el-table-column>
       <el-table-column
         prop="address"
@@ -20,12 +26,12 @@
       <el-table-column
         prop="date"
         label="日期"
-        width="180">
+        >
       </el-table-column>
       <el-table-column
         prop="name"
         label="姓名"
-        width="180">
+        >
       </el-table-column>
       <el-table-column
         prop="address"
@@ -34,12 +40,12 @@
       <el-table-column
         prop="date"
         label="日期"
-        width="180">
+        >
       </el-table-column>
       <el-table-column
         prop="name"
         label="姓名"
-        width="180">
+        >
       </el-table-column>
       <el-table-column
         prop="address"
@@ -48,12 +54,12 @@
       <el-table-column
         prop="date"
         label="日期"
-        width="180">
+        >
       </el-table-column>
       <el-table-column
         prop="name"
         label="姓名"
-        width="180">
+        >
       </el-table-column>
       <el-table-column
         prop="address"
@@ -62,18 +68,18 @@
       <el-table-column
         prop="date"
         label="日期"
-        width="180">
+        >
       </el-table-column>
       <el-table-column
         prop="name"
         label="姓名"
-        width="180">
+        >
       </el-table-column>
       <el-table-column
         prop="address"
         label="地址">
       </el-table-column>
-    </el-table>
+    </el-table> -->
   </div>
 </template>
 <script>

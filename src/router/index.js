@@ -57,11 +57,18 @@ const routes = [
     title: "傅红福",
     component: () => import("../views/home/homePage"),
     children: [
+      // {
+      //   path: "comT",
+      //   name: "comT",
+      //   title: "傅红福组件一",
+      //   component: () => import("../views/fhfCom/comT"),
+      // },
       {
-        path: "comT",
-        name: "comT",
-        title: "傅红福组件一",
-        component: () => import("../views/comT/comT"),
+        path: "tabelTransfer",
+        name: "tabelTransfer",
+        title: "表格穿梭框",
+        icon:'biaoge1',
+        component: () => import("../views/fhfCom/tabelTransfer/index.vue"),
       },
     ],
   },
