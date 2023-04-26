@@ -68,14 +68,33 @@ const routes = [
   {
     path: "/",
     name: "liuaobo",
-    title: "刘澳波",
+    title: "点点VS叉叉--lab",
+    icon:'aichong02',
     component: () => import("../views/home/homePage"),
     children: [
       {
         path: "labCom",
         name: "labCom",
-        title: "刘澳波组件一",
-        component: () => import("../views/labCom/comPage"),
+        // labCom: "labCom",
+        title: "表格展示",
+        icon:'biaoge1',
+        component:  () => import("../views/labCom/cleanForm/index.vue")
+      },
+      {
+        path: "qrCode",
+        name: "qrCode",
+        // labCom: "qrCode",
+        title: "二维码生成",
+        icon:'erweima',
+        component: () => import("../views/labCom/qrCode/index.vue"),
+      },
+      {
+        path: "verificationCode",
+        name: "verificationCode",
+        // labCom: "qrCode",
+        title: "登录页面",
+        icon:'jinrongxianxingge-',
+        component: () => import("@/views/labCom/verificationCode/index.vue"),
       },
     ],
   },
