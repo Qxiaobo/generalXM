@@ -55,6 +55,7 @@ const routes = [
     path: "/",
     name: "homePage",
     title: "傅红福",
+    icon:'aichong06',
     component: () => import("../views/home/homePage"),
     children: [
       // {
