@@ -104,6 +104,14 @@ const routes = [
         icon:'jinrongxianxingge-',
         component: () => import("@/views/labCom/verificationCode/index.vue"),
       },
+      {
+        path: "directiveDemo",
+        name: "directiveDemo",
+        // labCom: "qrCode",
+        title: "自定义指令",
+        icon:'yuedu',
+        component: () => import("@/views/labCom/directiveDemo/index.vue"),
+      },
     ],
   },
 ];
