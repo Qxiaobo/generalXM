@@ -27,6 +27,10 @@ service.interceptors.response.use(
     const res = response.data;
     // console.log(res, '兰拦截')
     // loadingInstance.close()
+    if(res=="[object Blob]"){
+      // console.log(Object.prototype.toString.call(res));
+      return res
+    }
     if (res && res.code !== "000000") {
       Message({
         message: res.message || "Error",
