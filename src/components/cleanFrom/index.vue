@@ -65,7 +65,7 @@ getMultipleSelection : {Function()} 获取表格多行选中的数据 } * @versi
             v-for="(item, index) in fieldList.filter((item) => !item.hidden)"
           >
             <!-- align="center" -->
-            :render-header="renderHeader"
+            <!-- :render-header="renderHeader" -->
             <el-table-column
               v-if="item.show"
               :key="index"

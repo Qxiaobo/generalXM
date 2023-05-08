@@ -14,6 +14,7 @@ service.interceptors.request.use(
     // if (token) {
     //   config.headers.Authorization = token;
     // }
+    config.headers.referer = 'https://jsgsn.cevmp.cn/subsidy/';
     return config;
   },
   (error) => {

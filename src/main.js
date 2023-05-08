@@ -16,8 +16,12 @@ Vue.use(VueParticles)
 
 import componentsTools from '@/components/index.js';
 Vue.use(componentsTools);
-import throttle from '@/utils/throttle.js';
-Vue.use(throttle);
+// import throttle from '@/utils/throttle.js';
+// Vue.use(throttle);
+
+// import "@/directive/throttle.js";
+import directive from './directive/index'
+Vue.use(directive);
 
 
 Vue.component('v-scale-screen', {
