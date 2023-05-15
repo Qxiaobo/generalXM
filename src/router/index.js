@@ -112,6 +112,13 @@ const routes = [
         icon:'yuedu',
         component: () => import("@/views/labCom/directiveDemo/index.vue"),
       },
+      {
+        path: "uploadFile",
+        name: "uploadFile",
+        title: "文件上传",
+        icon:'shangchuan1',
+        component: () => import("@/views/labCom/uploadFile/index.vue"),
+      },
     ],
   },
 ];
