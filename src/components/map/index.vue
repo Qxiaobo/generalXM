@@ -63,7 +63,6 @@ export default {
           //     <span>${params.value}</span>
           //   </div>`
           //   return html;
-
           // },
         },
         geo: [
@@ -256,6 +255,22 @@ export default {
         ],
       };
       myChart.setOption(option1, true);
+      //绑定市区点击事件
+      myChart.on("click", function (e) {
+        console.log(e, 'ddddddd');
+        alert(e.data.name)
+        //防止重复点击
+        //   if (than.name == e.name) {
+        //     return false;
+        //   }
+        //   than.options.series[0].data[0].name = e.name;
+        //   than.myChart.setOption(than.options);
+        //   than.styles.left = (e.event.event.offsetX - 132) + "px";//-132 根据布局计算偏移量
+        //   than.styles.top = (e.event.event.offsetY + 80) + "px";//80根据布局计算偏移量
+        //   than.name = e.name;
+        //请求后台接口获取对应数据 ---此处模拟
+        //   than.tabsChange(than.btn[0]);
+      })
     },
   },
 };
