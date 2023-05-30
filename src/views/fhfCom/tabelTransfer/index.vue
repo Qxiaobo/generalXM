@@ -15,7 +15,7 @@
             <el-row>
                 <el-col :span="11">
                     <div class="tableTitle">
-                        <span style="font-size: 18px; color: #000; font-weight: 700;">未申报充电桩</span>
+                        <span style="font-size: 18px; color: #000; font-weight: 700;">左侧</span>
                         <span>{{ staffCheckNum }}/{{ staffNum }}</span>
                     </div>
                     <!-- :key="tableKey" -->
@@ -25,23 +25,23 @@
                         <el-table-column type="index" width="50" align="center" />
                         <el-table-column type="selection" :reserve-selection="true" width="55"
                             align="center"></el-table-column>
-                        <el-table-column label="充电桩编码" align="center">
+                        <el-table-column label="编码" align="center">
                             <template slot-scope="{ row }">
                                 <span>{{ row.code }}</span>
                             </template>
                         </el-table-column>
 
-                        <el-table-column label="充电桩名称" align="center">
+                        <el-table-column label="名称" align="center">
                             <template slot-scope="{ row }">
                                 <span>{{ row.name }}</span>
                             </template>
                         </el-table-column>
-                        <el-table-column label="充电桩类型" align="center">
+                        <el-table-column label="类型" align="center">
                             <template slot-scope="{ row }">
                                 <span>{{ row.type }}</span>
                             </template>
                         </el-table-column>
-                        <el-table-column label="功率（千瓦）" align="center">
+                        <el-table-column label="分数" align="center">
                             <template slot-scope="{ row }">
                                 <span>{{ row.power }}</span>
                             </template>
@@ -63,7 +63,7 @@
                 </el-col>
                 <el-col :span="11">
                     <div class="tableTitle">
-                        <span style="font-size: 18px; color: #000; font-weight: 700;">待申报充电桩</span>
+                        <span style="font-size: 18px; color: #000; font-weight: 700;">右侧</span>
                         <span>{{ selectedStaffCheckNum }}/{{ selectedStaffNum }}</span>
                     </div>
                     <el-table ref="selectedStaffTable" :stripe="true" :data="selectedStaffList" max-height="345"
@@ -72,23 +72,23 @@
                         <el-table-column type="index" width="50" align="center" />
                         <el-table-column type="selection" :reserve-selection="true" width="55"
                             align="center"></el-table-column>
-                        <el-table-column label="充电桩编码" align="center">
+                        <el-table-column label="编码" align="center">
                             <template slot-scope="{ row }">
                                 <span>{{ row.code }}</span>
                             </template>
                         </el-table-column>
 
-                        <el-table-column label="充电桩名称" align="center">
+                        <el-table-column label="名称" align="center">
                             <template slot-scope="{ row }">
                                 <span>{{ row.name }}</span>
                             </template>
                         </el-table-column>
-                        <el-table-column label="充电桩类型" align="center">
+                        <el-table-column label="类型" align="center">
                             <template slot-scope="{ row }">
                                 <span>{{ row.type }}</span>
                             </template>
                         </el-table-column>
-                        <el-table-column label="功率（千瓦）" align="center">
+                        <el-table-column label="分数" align="center">
                             <template slot-scope="{ row }">
                                 <span>{{ row.power }}</span>
                             </template>
