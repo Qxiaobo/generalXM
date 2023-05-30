@@ -71,6 +71,20 @@ const routes = [
         icon:'biaoge1',
         component: () => import("../views/fhfCom/tabelTransfer/index.vue"),
       },
+      {
+        path: "map",
+        name: "map",
+        title: "地图",
+        icon:'biaoge1',
+        component: () => import("../views/fhfCom/map/index.vue"),
+      },
+      {
+        path: "com",
+        name: "com",
+        title: "预留测试页",
+        icon:'biaoge1',
+        component: () => import("../views/fhfCom/comT.vue"),
+      },
     ],
   },
   {
