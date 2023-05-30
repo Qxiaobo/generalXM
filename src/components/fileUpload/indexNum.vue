@@ -12,16 +12,15 @@
       ref="upload"
       :auto-upload="individual"
       :show-file-list="showFileList"
-      :http-request="uploadFile"
       :action="url"
+      :http-request="uploadFile"
       :headers="headers"
       :on-change="changeFileLength"
       :multiple="!individual"
-      :limit="individual ? 1 : limits" 
+      :limit="individual ? 1 : limits"
       :data="fileData"
       :name="fileName"
     >
-    <!-- :file-list="uploadFiles" -->
       <!-- <i class="el-icon-upload"></i> -->
       <!-- <div class="el-upload__text">点击上传文件</div> -->
       <el-button slot="trigger" size="small" type="primary">{{
@@ -124,7 +123,6 @@ export default {
     // 修改当前文件列表长度
     changeFileLength(file, fileList) {
       console.log(fileList,'fileList')
-      // this.uploadFiles = fileList;
       this.filesLength = fileList.length;
       console.log(this.uploadFiles,'文件列表')
     },
@@ -218,15 +216,13 @@ export default {
             });
           }
         })
-        // .catch((err) => {
-        //   this.uploadFiles = [];
-        //   this.$refs.upload.clearFiles();
-        //   this.$message({
-        //     message: "上传失败",
-        //     type: "error",
-        //     offset: 80,
-        //   });
-        // });
+        .catch((err) => {
+          this.$message({
+            message: "上传失败",
+            type: "error",
+            offset: 80,
+          });
+        });
       }
     },
   },

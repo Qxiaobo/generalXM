@@ -33,6 +33,18 @@
           v-copyDirective="copyText" >>>copyText指要复制的文本</el-divider
         >
       </div>
+            <!-- 水印指令演示 -->
+        <div class="itemDemo">
+        <el-button
+          type="primary"
+          style="display: inline-block"
+          >水印指令演示</el-button
+        >
+        <div v-waterMarker="{text:'lab版权所有',font:'12px',textColor:'rgba(180, 180, 180, 0.4)'}" style="width: 600px;height: 300px;"></div>
+        <el-divider content-position="left">
+          v-waterMarker="{text:'lab版权所有',textColor:'rgba(180, 180, 180, 0.4)'}"  >>>text:水印文本内容；font:'水印文字大小' textColor:'水印文本颜色'</el-divider
+        >
+      </div>
     </el-card>
   </div>
 </template>
