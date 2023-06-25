@@ -1,20 +1,22 @@
 // 滚动轴的样式
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 4px;
+  width: 12px;
+  height: 12px;
 }
 ::-webkit-scrollbar-track {
   border-radius: 8px;
 }
 ::-webkit-scrollbar-thumb {
   border-radius: 8px;
-  background: #002c57;
+  background: #ccc;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #002c57;
+  background: #ccc;
+
 }
 ::-webkit-scrollbar-thumb:active {
-  background: #002c57;
+  background: #ccc;
+
 }
 
 @import './mixin.scss';

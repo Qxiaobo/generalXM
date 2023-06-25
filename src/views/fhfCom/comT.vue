@@ -1,264 +1,173 @@
 <template>
-  <div>
-    <el-table
-      :data="tableData"
-      :span-method="arraySpanMethod"
+  <div class="box-wrapper">
+    <el-table 
       border
-      style="width: 100%">
-      <el-table-column
-        prop="id"
-        label="ID"
-        width="180">
-      </el-table-column>
-      <el-table-column
-        prop="name"
-        label="姓名">
-      </el-table-column>
-      <el-table-column
-        prop="amount1"
-        sortable
-        label="数值 1">
-      </el-table-column>
-      <el-table-column
-        prop="amount2"
-        sortable
-        label="数值 2">
-      </el-table-column>
-      <el-table-column
-        prop="amount3"
-        sortable
-        label="数值 3">
-      </el-table-column>
-    </el-table>
-
-    <el-table
-      :data="tableData"
-    :span-method="objectSpanMethod"
-      border
-      style="width: 100%; margin-top: 20px">
-      <!-- <el-table-column
-        :render-header="renderHeader"
-       > -->
-      <el-table-column
-        prop="menuRow1"
-        width="180">
-      </el-table-column>
-        <el-table-column
-        prop="id"
-        width="180">
-      </el-table-column>
-      <el-table-column
-        prop="name"
-        label="姓名">
-      </el-table-column>
-      <el-table-column
-        prop="amount1"
-        label="数值 1（元）">
-      </el-table-column>
-      <el-table-column
-        prop="amount2"
-        label="数值 2（元）">
-      </el-table-column>
-      <el-table-column
-        prop="amount3"
-        label="数值 3（元）">
-      </el-table-column>
-      <!-- </el-table-column> -->
-
-    </el-table>
+      :data="tableData" 
+      :header-cell-style="headerCellStyle"
+      :span-method="spanMergeMethod"
+      style="width: 80%">
+    <el-table-column 
+      prop="no" 
+      label="项目编号" 
+      align="center"
+      > 
+    </el-table-column>
+    <el-table-column 
+      prop="name" 
+      label="项目名称" 
+      align="center"
+      > 
+    </el-table-column>
+    <el-table-column 
+      prop="stageName" 
+      label="阶段名称"
+      align="center"> 
+    </el-table-column>
+    <el-table-column 
+      prop="date" 
+      label="开始时间"
+      align="center"> 
+    </el-table-column>
+    <el-table-column 
+      prop="status" 
+      label="状态"
+      align="center"> 
+    </el-table-column>
+    <el-table-column align="center" label="操作">
+      <template>
+        <el-button type="text"   size="small">编辑</el-button>
+      </template>
+    </el-table-column>
+    <el-table-column align="center" label="操作" >
+      <template>
+        <el-button type="danger" size="small">删除项目</el-button>
+      </template>
+    </el-table-column>
+  </el-table>
   </div>
 </template>
 
 <script>
-  export default {
-    data() {
-      return {
-        tableData: [{
-          id: '12987122',
-          name: '王小虎1',
-          menuRow1:'存量情况',
-          amount1: '234',
-          amount2: '3.2',
-          amount3: 10
-        }, {
-          id: '12987123',
-          name: '王小虎2',
-          amount1: '165',
-          // menuRow1:'存量情况',
-          amount2: '4.43',
-          amount3: 12
-        }, {
-          id: '12987124',
-          // menuRow1:'存量情况',
-          name: '王小虎3',
-          amount1: '324',
-          amount2: '1.9',
-          amount3: 9
-        }, {
-          id: '12987125',
-          name: '王小虎4',
-          // menuRow1:'存量情况',
-          amount1: '621',
-          amount2: '2.2',
-          amount3: 17
-        },
-         {
-          id: '12987126',
-          name: '王小虎5',
-          amount1: '539',
-          menuRow1:'今年年完成情况',
-
-          // menuRow1:'存量情况',
-
-          amount2: '4.1',
-          amount3: 15
+export default {
+  name: 'HelloWorld',
+  props: {
+    msg: String,
+  },
+  data() {
+    return {
+      tableData: [],
+      spanArr: [],
+      list: [
+        {
+          openid: '20a',
+          no: '#33390',
+          name: '项目A',
+          stages: [
+             { stageName: '阶段一', date: '2016-05-02', status: '已结束' },
+             { stageName: '阶段二', date: '2020-05-02', status: '已结束' },
+             { stageName: '阶段三', date: '2022-05-02', status: '建设中' },
+          ]
         },
         {
-          id: '12987126',
-          name: '王小虎6',
-          amount1: '539',
-          // menuRow1:'今年年完成情况',
-
-          // menuRow1:'存量情况',
-
-          amount2: '4.1',
-          amount3: 15
+          openid: '21b',
+          no: '#33391',
+          name: '项目B',
+          stages: [
+             { stageName: '阶段一', date: '2016-05-02', status: '已结束' },
+             { stageName: '阶段二', date: '2020-05-02', status: '已结束' },
+             { stageName: '阶段三', date: '2022-05-02', status: '建设中' },
+          ]
         },
-        {
-          id: '12987126',
-          name: '王小虎7',
-          amount1: '539',
-          // menuRow1:'存量情况',
-          // menuRow1:'今年年完成情况',
-
-
-          amount2: '4.1',
-          amount3: 15
-        },
-        {
-          id: '12987126',
-          name: '王小虎8',
-          amount1: '539',
-          // menuRow1:'存量情况',
-          // menuRow1:'今年年完成情况',
-
-          amount2: '4.1',
-          amount3: 15
-        },
-        {
-          id: '12987126',
-          name: '王小虎9',
-          amount1: '539',
-          menuRow1:'增量情况',
-
-          // menuRow1:'存量情况',
-          amount2: '4.1',
-          amount3: 15
-        },
-        {
-          id: '12987126',
-          name: '王小虎10',
-          amount1: '539',
-          // menuRow1:'存量情况',
-          // menuRow1:'增量情况',
-
-          amount2: '4.1',
-          amount3: 15
-        },
-        {
-          id: '12987126',
-          name: '王小虎11',
-          amount1: '539',
-          // menuRow1:'增量情况',
-
-          // menuRow1:'存量情况',
-          amount2: '4.1',
-          amount3: 15
-        },
-        {
-          id: '12987126',
-          name: '王小虎12',
-          amount1: '539',
-          // menuRow1:'增量情况',
-
-          // menuRow1:'存量情况',
-          amount2: '4.1',
-          amount3: 15
-        },
-        {
-          id: '12987126',
-          name: '王小虎13',
-          amount1: '539',
-          // menuRow1:'存量情况',
-          menuRow1:'总体情况',
-
-          amount2: '4.1',
-          amount3: 15
-        },
-        {
-          id: '12987126',
-          name: '王小虎8',
-          amount1: '539',
-          // menuRow1:'总体情况',
-
-          // menuRow1:'存量情况',
-          amount2: '4.1',
-          amount3: 15
-        },
-        {
-          id: '12987126',
-          name: '王小虎8',
-          amount1: '539',
-          // menuRow1:'总体情况',
-
-          // menuRow1:'存量情况',
-          amount2: '4.1',
-          amount3: 15
+      
+      ],
+    };
+  },
+  mounted(){
+    this.tableData = this.dataListConvert(this.list);
+    this.rowSpan(this.tableData);
+  },
+  methods: {
+    dataListConvert(list){
+      const arr = [];
+      list.forEach(item => {
+        const { no, openid, name, stages } = item;
+        if (item.stages.length === 1) {
+          arr.push({ no, openid, name, ...stages[0] });
+        } else {
+          stages.forEach(stage => {
+            arr.push({  no, openid, name, ...stage });
+          });
         }
-        
-      ]
-      };
+      });
+      return arr;
     },
-    methods: {
-      renderHeader(h, { column }){
-        return h('div', {style:'height:42px;line-height:42px;text-align:center;'} ,[
-          h('span', { style:'font-size:32px', },'新能源一次调频功能推进情况汇总表')
-        ])
-      },
-      // arraySpanMethod({ row, column, rowIndex, columnIndex }) {
-      //   // console.log(row,'row')
-      //   // console.log(column,'column')
-      //   console.log(rowIndex,'rowIndex')
-      //   if (rowIndex % 2 === 0) {
-      //     if (columnIndex === 0) {
-      //       return [1, 2];
-      //     } else if (columnIndex === 1) {
-      //       return [0, 0];
-      //     }
-      //   }
-      // },
 
-      objectSpanMethod({ row, column, rowIndex, columnIndex }) {
-        console.log(rowIndex,'rowIndex')
-        console.log(columnIndex,'columnIndex')
-        if (columnIndex === 0) {
-          console.log('第一列')
-          if (rowIndex % 2 === 0) {
-            return [4,1]
-          } else if(rowIndex == 13){
-            return [3,1]
-          }
-          return
-        }
+    /* 合并表头最后两项*/
+    headerCellStyle({ row, columnIndex }){
+      // 这里 row[5] 为表头倒数第二列, row[6] 为倒数第一列
+      // row[5].colSpan = 2;
+      // row[6].colSpan = 0;
+      // if (columnIndex === 6) {
+      //   return 'display: none';
+      // }
+      row[1].colSpan = 2;
+      // row[1].colSpan = 1;
+      if (columnIndex === 0) {
+        return 'display: none';
       }
-    }
-  };
-</script>
-<style scoped>
-  .wrap{
-    width: 100%;
-    height: calc(100% - 52px);
-    /* background-color: rgb(175, 251, 104); */
-    box-sizing: border-box;
+    },
+    /*
+     * 用来返回 this.spanArr数组，用来定义表格每一行的 rowspan
+     * rowspan的值：0 代表消失，1代表独占一行，2以上的值代表合并了若干行
+     */
+    rowSpan(list){
+      list.forEach((item, index) => {
+        if (index === 0) {
+          // 第一行，直接给数组push一个1，表示自己先占一行
+          this.spanArr.push(1);
+          // 表示数组的第一个元素
+          this.position = 0;
+        } else {
+          if (list[index].openid === list[index - 1].openid){
+            // 如果第二行与第一行相等，则this.position就+1,当有n行与前一行相同时，this.position就为n,表示向下合并n行
+            this.spanArr[this.position] += 1;
+            // this.spanArr.push(0)表示第二行消失
+            this.spanArr.push(0);
+          } else {
+            // 如果第二行与第一行不相等的话，那么this.spanArr.push(1);就让第二行自己独占一行；
+            // this.position = index意思就是把指针拿到index这行来
+            this.spanArr.push(1);
+            this.position = index;
+          }
+        }
+      });
+    },
+    /**
+     * element-ui table方法，实现合并行或者列
+     * @param row
+     * @param column
+     * @param rowIndex
+     * @param columnIndex
+     * @return {{colspan: number, rowspan: *}}
+     */
+    spanMergeMethod({ rowIndex, columnIndex }) {
+      // 需要合并的列的Index值，这里是第一，第二和最后一列的index值
+      const mergeColumnIndex = [0, 1, 6];
+      const needMerge = mergeColumnIndex.includes(columnIndex);
+      if (needMerge) {
+        const _row = this.spanArr[rowIndex];
+        const _col = _row > 0 ? 1 : 0;
+        return { rowspan: _row, colspan: _col };
+      }
+    },
   }
+};
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped lang="scss">
+.box-wrapper {
+  margin:  0 auto;
+  width: 1200px;
+}
 </style>
