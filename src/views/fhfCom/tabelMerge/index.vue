@@ -214,8 +214,6 @@ export default {
                 originArr.map(res => {
                     if (Array.isArray(res.children)) {
                         res.children.map((subRes, subIndex) => {
-
-
                             subRes.children.map((item, index) => {
                                 item.children.map((obj, objIdx) => {
                                     let content = {}
@@ -227,11 +225,9 @@ export default {
                                     content['mz'] = item.mz
                                     // 重点！赋值合并的行数数值，只需要取子循环的第一个数赋值待合并的行数即可
                                     if (index == 0&&objIdx == 0) {
-
                                         content['rowNum2'] = subRes.children.length * item.children.length
                                     }
                                     if (objIdx == 0) {
-
                                         content['rowNum3'] = item.children.length
                                     }
                                     content['name'] = obj.name
