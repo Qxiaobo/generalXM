@@ -79,6 +79,13 @@ const routes = [
         component: () => import("../views/fhfCom/map/index.vue"),
       },
       {
+        path: "tabelMerge",
+        name: "mtabelMergeap",
+        title: "表格合并行",
+        icon:'biaoge1',
+        component: () => import("../views/fhfCom/tabelMerge/index"),
+      },
+      {
         path: "com",
         name: "com",
         title: "预留测试页",
