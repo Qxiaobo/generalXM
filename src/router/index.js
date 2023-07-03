@@ -143,14 +143,14 @@ const routes = [
       {
         path: "AboutView",
         name: "AboutView",
-        title: "表格合并",
+        title: "表格合并及鼠标右键菜单",
         icon:'shangchuan1',
-        component: () => import("@/views/labCom/AboutView"),
+        component: () => import("@/views/labCom/tableMerge/index.vue"),
       },
       {
         path: "gaspShow",
         name: "gaspShow",
-        title: "gasp动画",
+        title: "翻牌动画",
         icon:'shangchuan1',
         component: () => import("@/views/labCom/gaspShow/index.vue"),
       },
