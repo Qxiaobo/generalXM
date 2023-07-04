@@ -7,6 +7,7 @@
       <div class="itemDemo">
         <el-button
           type="primary"
+          v-waves
           v-throttle="[doThrottle, 1000, 'click', '这个是传递的参数']"
           >节流指令演示</el-button
         >
@@ -44,6 +45,11 @@
         <el-divider content-position="left">
           v-waterMarker="{text:'lab版权所有',textColor:'rgba(180, 180, 180, 0.4)'}"  >>>text:水印文本内容；font:'水印文字大小' textColor:'水印文本颜色'</el-divider
         >
+        <el-button  type="primary"  v-waves class="item">波纹按钮自定义指令</el-button>
+        <el-button type="primary" v-waves="'pink'" class="item">波纹按钮可传颜色自定义指令</el-button>
+        <el-divider content-position="left">
+          v-waves="'pink'"  >>>pink为颜色 </el-divider
+        >
       </div>
     </el-card>
   </div>
@@ -79,5 +85,17 @@ export default {
 }
 .itemDemo {
   padding: 10px;
+}
+.item {
+  font-size: 14px;
+  // width: 140px;
+  padding: 0 8px;
+  height: 40px;
+  line-height:40px;
+  border-radius: 6px;
+  text-align: center;
+  border: 1px solid #aaa;
+  margin-bottom: 18px;
+  cursor: pointer;
 }
 </style>

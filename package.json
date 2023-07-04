@@ -22,6 +22,7 @@
     "lodash": "^4.17.21",
     "qrcode": "^1.5.3",
     "scss": "^0.2.4",
+    "sortablejs": "^1.15.0",
     "table-excel": "^2.0.2",
     "v-scale-screen": "^2.2.0",
     "vue": "^2.6.14",
