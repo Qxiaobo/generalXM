@@ -54,6 +54,13 @@
               <el-button type="danger" @click="doTableOption(row)" > 最后一列的插槽</el-button>
             </template>
       </CleanForm>
+      <div id="wrapBox">
+      <div data-id="1工商银行">工商银行</div>
+      <div data-id="2建设银行">建设银行</div>
+      <div data-id="3中国银行">中国银行</div>
+      <div data-id="4农业银行">农业银行</div>
+      <div data-id="5交通银行">交通银行</div>
+    </div>
     </el-card>
     <el-dialog
   title="提示"
@@ -77,6 +84,8 @@
 import "@/mock/labMock/index.js";
 import { getFromApi01,download,getQueryAllApply } from "@/api/labApi/fromApi.js";
 import axios from 'axios'
+import Sortable from "sortablejs";
+
 export default {
   name: "LabProjectIndex",
 
@@ -102,9 +111,33 @@ export default {
     };
   },
 
-  mounted() {},
+  mounted() {
+    this.priorityPay()
+  },
 
   methods: {
+    priorityPay() {
+      //第一步，获取拖动容器
+      var wrap = document.getElementById("wrapBox");
+      //第二步，设置拖动项的拖动规则
+      var rules = {
+        animation: 500, // 拖动时的元素的位置变化的动画时长，
+        //拖动结束后的回调函数
+        onEnd: function (event) {
+          console.log("参数是拖动事件对象", event);
+          //获取拖动后容器中的每一项的位置排序
+          var arr = sortable.toArray();
+          console.log("位置排序", arr);
+        },
+      };
+      //第三步，初始化 --> 给拖动容器添加拖动规则
+      var sortable = Sortable.create(wrap, rules);
+      /**
+       * 插件自带的方法：
+       *      1. sortable.toArray() 获取序列化后的每个item元素的id属性的数组
+       *      2. Sortable.create(wrap, rules) 给拖动容器添加拖动规则
+       * */
+    },
      doTest(e){
       console.log(e)
       console.log('点击')
@@ -157,4 +190,24 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+#wrapBox {
+  width: 360px;
+  /* 拖动容器的高度，由拖动项的高度撑开 */
+  height: auto;
+}
+
+#wrapBox div {
+  padding: 8px;
+  background-color: #fdfdfd;
+  border: solid 1px #eee;
+  margin-bottom: 10px;
+  /* 添加鼠标悬浮样式为移动的样式，要不然不好看 */
+  cursor: move;
+  font-size: 13px;
+}
+
+/* 设置鼠标按下时候的样式，加了好看些 */
+#wrapBox div:active {
+  background-color: #eee;
+}
 </style>
