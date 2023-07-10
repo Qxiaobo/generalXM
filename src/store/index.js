@@ -5,13 +5,13 @@ Vue.use(Vuex);
 import createPersistedState from "vuex-persistedstate";
 export default new Vuex.Store({
   //创建持久化存储
-  plugins: [
-    createPersistedState({
-      storage: sessionStorage,
-      //指定需要持久化存储的数据路径
-      paths: ["navList", "currentNav"],
-    }),
-  ],
+  // plugins: [
+  //   createPersistedState({
+  //     storage: sessionStorage,
+  //     //指定需要持久化存储的数据路径
+  //     paths: ["navList", "currentNav"],
+  //   }),
+  // ],
   state: {
     labTags: [{ name: "表格展示", path: "/labCom" },{ name: "二维码生成", path: "/qrCode" },], //动态路由
     navList: [

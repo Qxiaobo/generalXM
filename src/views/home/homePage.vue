@@ -65,7 +65,11 @@
 
         <el-main>
           <div class="navWrap">
-            <template v-for="(i, j) in navList">
+            <div class="leftButton">
+              <i class="el-icon-arrow-left" style="font-size: 34px;" ></i>
+            </div>
+            <div class="centerButton">
+              <template v-for="(i, j) in navList">
               <div
                 :key="j"
                 :class="currentNav == i.path ? 'currentNav' : 'everyNav'"
@@ -77,14 +81,20 @@
                     class="iconfont icon-guanbi imgActive"
                     @click.stop="closeNav(j)"
                   ></i>
-                  <!-- <svg class="icon imgActive"   @click.stop="closeNav(j)" aria-hidden="true">
-                  <use  :xlink:href="`#icon-guanbi`"></use>
-                </svg> -->
                 </div>
               </div>
             </template>
-            <div></div>
+            </div>
+            <div class="rightButton">
+              <i class="el-icon-arrow-right" style="font-size:34px;" ></i>
+
+            </div>
+
+            <!-- <div></div> -->
           </div>
+          <!-- <div class="navWrap">
+        你好
+          </div> -->
           <router-view />
         </el-main>
       </el-container>
@@ -216,17 +226,43 @@ export default {
   display: flex;
   align-items: center;
   border-bottom: 1px solid gray;
+  .leftButton,
+  .rightButton 
+  {
+    width: 3%;
+    height: 70%;
+    // background: #ccc;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .rightButton{
+    float: right;
+  }
+  .centerButton{
+    display: flex;
+  align-items: center;
+  width: 94%;
+  overflow: hidden;
+  }
 }
 
 .everyNav {
-  height: 30px;
-  line-height: 30px;
+  height: 25px;
+  line-height: 25px;
   margin-left: 10px;
   border: 1px solid rgb(125, 125, 125);
   border-radius: 4px;
   padding: 0 10px;
   cursor: pointer;
   position: relative;
+  overflow: hidden;
+ text-overflow: ellipsis;
+ white-space: nowrap;
+ transition: all 0.5s;
 }
 
 .everyNav:hover {
@@ -235,15 +271,19 @@ export default {
 }
 
 .currentNav {
-  height: 30px;
-  line-height: 30px;
+  height: 25px;
+  line-height: 25px;
   margin-left: 10px;
   border-radius: 4px;
   padding: 0 10px;
   cursor: pointer;
   position: relative;
-  color: #1296db;
+  color: #fff;
+  background: #1296db;
   border: 1px solid #1296db;
+  overflow: none;
+  text-overflow: none;
+//  white-space: none;
 }
 
 .closeWrap {
@@ -252,8 +292,9 @@ export default {
   text-align: center;
   line-height: 20px;
   position: absolute;
-  right: -10px;
-  top: -10px;
+  // overflow: auto;
+  right: -5px;
+  top: -5px;
 }
 
 .imgActive {
