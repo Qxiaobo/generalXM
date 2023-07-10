@@ -30,7 +30,6 @@
       <el-divider></el-divider>
 
       <my-card
-      :key="index"
       class="cardClass cardClass2"
       :cardStyle="{
         background: '#CCDDEE',

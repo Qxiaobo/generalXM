@@ -161,6 +161,20 @@ const routes = [
         icon:'m-gundongwenzi',
         component: () => import("@/views/labCom/textRoll/index.vue"),
       },
+      {
+        path: "richText",
+        name: "richText",
+        title: "富文本",
+        icon:'m-gundongwenzi',
+        component: () => import("@/views/labCom/richText/index.vue"),
+      },
+      {
+        path: "labVideo",
+        name: "labVideo",
+        title: "视频组件",
+        icon:'m-gundongwenzi',
+        component: () => import("@/views/labCom/labVideo/index.vue"),
+      },
     ],
   },
 ];

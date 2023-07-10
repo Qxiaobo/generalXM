@@ -9,6 +9,8 @@ import '@/mock/data.js'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 
+
+
 // 引入echarts
 import * as echarts from "echarts";
 Vue.prototype.$echarts = echarts;
@@ -17,6 +19,8 @@ import VScaleScreen from 'v-scale-screen';
 
 import VueParticles from 'vue-particles'
 Vue.use(VueParticles) 
+
+
 
 import componentsTools from '@/components/index.js';
 Vue.use(componentsTools);
