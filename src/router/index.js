@@ -41,7 +41,7 @@ const routes = [
     name: "home",
     title: "首页",
     component: () => import("../views/home/homePage"),
-    redirect: "/qiankun",
+    redirect: "/home",
     children: [
       {
         path: "home",
