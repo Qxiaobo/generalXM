@@ -8,10 +8,6 @@
 
       <FileUploadS :url="'http://192.168.0.110:8080/add/file'" :fileData="fileData"></FileUploadS>
       <el-divider></el-divider>
-
-      <SelectAdd :labelslist="selectList" val="value" label="label">
-      </SelectAdd>
-      <el-divider></el-divider>
       <el-upload class="upload-demo" action="" ref="upload" :on-change="handleChange" :file-list="fileListUpload"
         :limit="1" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel"
         :auto-upload="false">
@@ -283,28 +279,7 @@ export default {
           { label: "24:00", prop: "item16", width: 93 },
         ],
       ],
-      selectList: [
-        {
-          value: "1",
-          label: "小红",
-        },
-        {
-          value: "2",
-          label: "小明",
-        },
-        {
-          value: "3",
-          label: "小李",
-        },
-        {
-          value: "4",
-          label: "小张",
-        },
-        {
-          value: "5",
-          label: "小刘",
-        },
-      ],
+ 
       sheetList: [],
       fileData: {
         name: "file",

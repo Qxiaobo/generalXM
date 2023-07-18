@@ -3,6 +3,7 @@ import copyDirective from './copyDirective'
 import waterMarker from './waterMarker'
 import waves from "./waves";
 import lazyload from "./lazyload";
+import clickOutside from "./clickOutside/index.js";
 
 
 
@@ -14,7 +15,7 @@ const install = function(Vue) {
     Vue.directive('waves', waves)
     Vue.directive('lazyload', lazyload)
     Vue.directive('lazy', lazyload)
-
+    Vue.directive('clickOutside', clickOutside)
 
   }
 

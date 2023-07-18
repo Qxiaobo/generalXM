@@ -7,55 +7,24 @@
 
     <el-container style="position: relative">
       <el-header height="100px" style="overflow-y: hidden">
-        <vue-particles
-          class="par-box"
-          color="#fff"
-          :particleOpacity="0.7"
-          :particlesNumber="300"
-          shapeType="circle"
-          :particleSize="2"
-          linesColor="#fff"
-          :linesWidth="1"
-          :lineLinked="true"
-          :lineOpacity="0.4"
-          :linesDistance="50"
-          :moveSpeed="3"
-          :hoverEffect="true"
-          hoverMode="grab"
-          :clickEffect="true"
-          clickMode="push"
-        >
+        <vue-particles class="par-box" color="#fff" :particleOpacity="0.7" :particlesNumber="300" shapeType="circle"
+          :particleSize="2" linesColor="#fff" :linesWidth="1" :lineLinked="true" :lineOpacity="0.4" :linesDistance="50"
+          :moveSpeed="3" :hoverEffect="true" hoverMode="grab" :clickEffect="true" clickMode="push">
         </vue-particles>
       </el-header>
       <el-container>
         <el-aside style="width: 400px">
-          <el-menu
-            :default-active="$route.path"
-            background-color="#fff"
-            active-text-color="#1890ff"
-            class="el-menu-vertical-demo"
-            text-color="#000"
-            router
-          >
-            <el-submenu
-              :index="'/' + item.name"
-              v-for="(item, index) in routerList"
-              :key="index"
-            >
+          <el-menu :default-active="$route.path" background-color="#fff" active-text-color="#1890ff"
+            class="el-menu-vertical-demo" text-color="#000" router>
+            <el-submenu :index="'/' + item.name" v-for="(item, index) in routerList" :key="index">
               <template slot="title">
                 <svg class="icon" aria-hidden="true">
                   <use :xlink:href="`#icon-${item.icon}`"></use>
                 </svg>
                 <span slot="title" class="menu-title">{{ item.title }}</span>
               </template>
-              <el-menu-item
-                :index="'/' + j.path"
-                @click="toEveryRouter(j)"
-                :title="j.title"
-                v-for="(j, i) in item.children"
-                :key="i"
-                class="everyRouter"
-                >   <svg class="icon" aria-hidden="true">
+              <el-menu-item :index="'/' + j.path" @click="toEveryRouter(j)" :title="j.title"
+                v-for="(j, i) in item.children" :key="i" class="everyRouter"> <svg class="icon" aria-hidden="true">
                   <use :xlink:href="`#icon-${j.icon}`"></use>
                 </svg>{{ j.title }}
               </el-menu-item>
@@ -66,27 +35,23 @@
         <el-main>
           <div class="navWrap">
             <div class="leftButton">
-              <i class="el-icon-arrow-left" style="font-size: 34px;" ></i>
+              <i class="el-icon-arrow-left" style="font-size: 34px;"></i>
             </div>
             <div class="centerButton">
               <template v-for="(i, j) in navList">
-              <div
-                :key="j"
-                :class="currentNav == i.path ? 'currentNav' : 'everyNav'"
-                @click="clickNav(i.path)"
-              >
-                {{ i.title }}
-                <div class="closeWrap" v-if="i.path != 'home'">
-                  <i
-                    class="iconfont icon-guanbi imgActive"
-                    @click.stop="closeNav(j)"
-                  ></i>
-                </div>
-              </div>
-            </template>
+                <transition name="el-zoom-in-top" :key="j">
+                  <div :key="j" :class="currentNav == i.path ? 'currentNav' : 'everyNav'" @click="clickNav(i.path)">
+                    {{ i.title }}
+                    <div class="closeWrap" v-if="i.path != 'home'">
+                      <i class="iconfont icon-guanbi imgActive" @click.stop="closeNav(j)"></i>
+                    </div>
+                  </div>
+                </transition>
+
+              </template>
             </div>
             <div class="rightButton">
-              <i class="el-icon-arrow-right" style="font-size:34px;" ></i>
+              <i class="el-icon-arrow-right" style="font-size:34px;"></i>
 
             </div>
 
@@ -162,6 +127,7 @@ export default {
 .par-box {
   z-index: -1;
 }
+
 .el-header {
   // background-color: purple;
   color: #333;
@@ -185,6 +151,7 @@ export default {
   color: #fff;
   text-shadow: 1px 1px 1px #000;
 }
+
 .headerTop::after {
   display: inline-block;
   content: "";
@@ -226,9 +193,9 @@ export default {
   display: flex;
   align-items: center;
   border-bottom: 1px solid gray;
+
   .leftButton,
-  .rightButton 
-  {
+  .rightButton {
     width: 3%;
     height: 70%;
     // background: #ccc;
@@ -239,14 +206,16 @@ export default {
     align-items: center;
     justify-content: center;
   }
-  .rightButton{
+
+  .rightButton {
     float: right;
   }
-  .centerButton{
+
+  .centerButton {
     display: flex;
-  align-items: center;
-  width: 94%;
-  overflow: hidden;
+    align-items: center;
+    width: 94%;
+    overflow: hidden;
   }
 }
 
@@ -260,9 +229,9 @@ export default {
   cursor: pointer;
   position: relative;
   overflow: hidden;
- text-overflow: ellipsis;
- white-space: nowrap;
- transition: all 0.5s;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: all 0.5s;
 }
 
 .everyNav:hover {
@@ -283,7 +252,7 @@ export default {
   border: 1px solid #1296db;
   overflow: none;
   text-overflow: none;
-//  white-space: none;
+  //  white-space: none;
 }
 
 .closeWrap {

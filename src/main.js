@@ -30,7 +30,12 @@ Vue.use(componentsTools);
 // import "@/directive/throttle.js";
 import directive from './directive/index'
 Vue.use(directive);
-
+// plugins = [
+//   new HtmlWebpackPlugin(),
+//   new htmlWebpackInjectAttributesPlugin({
+//   entry: "true",
+//   })
+//   ]
 
 Vue.component('v-scale-screen', {
   name: 'v-scale-screen',
@@ -44,13 +49,43 @@ Vue.use(VScaleScreen, {
 
 Vue.use(ElementUI);
 const router = new VueRouter({
+  mode: "history",
   // 👇 设置基础路由，子应用可以通过window.__MICRO_APP_BASE_ROUTE__获取基座下发的baseroute，如果没有设置baseroute属性，则此值默认为空字符串
-  base: window.__MICRO_APP_BASE_ROUTE__ || "/",
+  // base: window.__MICRO_APP_BASE_ROUTE__ || "/",
   routes,
 });
-let sp = document.createElement('script');
-sp.src = '//at.alicdn.com/t/c/font_4032346_2repn08edkt.js';
-document.body.appendChild(sp);
+
+import { registerMicroApps, start } from 'qiankun';
+
+registerMicroApps([
+  // {
+  //   name: 'react app', // app name registered
+  //   entry: 'http://localhost:3000/react-ant-admin',
+  //   container: '#react',
+  //   activeRule: '/react',
+  // },
+  {
+    name: 'qydn_web',
+    entry: '//localhost:3070/projectStorage',
+    container: '#vue',
+    props: { a: 1 }, // 父应用向子应用传递参数
+    activeRule: '/qiankun',
+  },
+]);
+
+
+// 开启应用
+start();
+
+
+
+
+
+
+
+// let sp = document.createElement('script');
+// sp.src = '//at.alicdn.com/t/c/font_4032346_2repn08edkt.js';
+// document.body.appendChild(sp);
 new Vue({
   router,
   store,

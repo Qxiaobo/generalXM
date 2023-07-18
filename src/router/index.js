@@ -41,7 +41,7 @@ const routes = [
     name: "home",
     title: "首页",
     component: () => import("../views/home/homePage"),
-    redirect: "/home",
+    redirect: "/qiankun",
     children: [
       {
         path: "home",
@@ -134,6 +134,13 @@ const routes = [
         component: () => import("@/views/labCom/directiveDemo/index.vue"),
       },
       {
+        path: "inputDemo",
+        name: "inputDemo",
+        title: "输入框组件",
+        icon:'shangchuan1',
+        component: () => import("@/views/labCom/inputDemo/index.vue"),
+      },
+      {
         path: "uploadFile",
         name: "uploadFile",
         title: "文件上传",
@@ -174,6 +181,13 @@ const routes = [
         title: "视频组件",
         icon:'m-gundongwenzi',
         component: () => import("@/views/labCom/labVideo/index.vue"),
+      },
+      {
+        path: "qiankun",
+        name: "qiankun",
+        title: "微前端qiankun",
+        icon:'m-gundongwenzi',
+        component: () => import("@/views/labCom/qiankun/index.vue"),
       },
     ],
   },

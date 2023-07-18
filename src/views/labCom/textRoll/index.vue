@@ -60,6 +60,9 @@
         </div>
       </div>
     </my-card>
+    <div  style="width: 200px;height: 200px;background:#ccc;" v-clickOutside="clickoutside" @click="click"  >
+
+    </div>
     </div>
   </template>
   
@@ -92,6 +95,14 @@
         ],
         routesList: this.$router.options.routes,
       };
+    },
+    methods: {
+      clickoutside() {
+        this.$message.success("点击外部");
+      },
+      click(){
+        this.$message.warning("点击内部");
+      }
     },
   };
   </script>

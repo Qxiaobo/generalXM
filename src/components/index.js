@@ -10,6 +10,7 @@ import myCard from './myCard/src/index.vue'
 // import richText from './richText/index.vue'
 import labVideo from './labVideo/index.vue'
 import RichText from './Tinymce/index.vue'
+import inputIp from './inputIp/index.vue'
 export default {
     install(app) {
         app.component('CleanForm', CleanForm)
@@ -23,7 +24,7 @@ export default {
         app.component('myCard', myCard)
         app.component('labVideo', labVideo)
         app.component('RichText', RichText)
-        // app.component('richText', richText)
+        app.component('inputIp', inputIp)
         
         
     }
