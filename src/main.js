@@ -83,9 +83,9 @@ start();
 
 
 
-// let sp = document.createElement('script');
-// sp.src = '//at.alicdn.com/t/c/font_4032346_2repn08edkt.js';
-// document.body.appendChild(sp);
+let sp = document.createElement('script');
+sp.src = '//at.alicdn.com/t/c/font_4032346_2repn08edkt.js';
+document.body.appendChild(sp);
 new Vue({
   router,
   store,
