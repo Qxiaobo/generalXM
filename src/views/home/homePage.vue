@@ -152,18 +152,18 @@ export default {
   text-shadow: 1px 1px 1px #000;
 }
 
-.headerTop::after {
-  display: inline-block;
-  content: "";
-  // position: absolute;
-  // top: 100%;
-  // left: 0;
-  width: 160px;
-  height: 60px;
-  // background: #000;
-  background-image: url("https://3o.hk/images/2023/04/24/c3115fc4-4b6f-47b6-a001-4922cd00f373.png") !important;
-  background-size: 100% 100%;
-}
+// .headerTop::after {
+//   display: inline-block;
+//   content: "";
+//   // position: absolute;
+//   // top: 100%;
+//   // left: 0;
+//   width: 160px;
+//   height: 60px;
+//   // background: #000;
+//   background-image: url("https://3o.hk/images/2023/04/24/c3115fc4-4b6f-47b6-a001-4922cd00f373.png") !important;
+//   background-size: 100% 100%;
+// }
 
 .el-aside {
   background-color: #d3dce6;

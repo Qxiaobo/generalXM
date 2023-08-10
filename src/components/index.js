@@ -25,7 +25,5 @@ export default {
         app.component('labVideo', labVideo)
         app.component('RichText', RichText)
         app.component('inputIp', inputIp)
-        
-        
     }
 }

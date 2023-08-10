@@ -767,6 +767,7 @@ export default {
     color: #1396c2 !important;
     font-size: 13px;
     border: none;
+    cursor: pointer;
   }
 }
 
