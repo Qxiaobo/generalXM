@@ -196,6 +196,13 @@ const routes = [
         icon:'m-gundongwenzi',
         component: () => import("@/views/labCom/echatsTest/index.vue"),
       },
+      // {
+      //   path: "commonTest",
+      //   name: "commonTest",
+      //   title: "公共测试",
+      //   icon:'m-gundongwenzi',
+      //   component: () => import("@/views/labCom/echatsTest/index.vue"),
+      // }
     ],
   },
 ];

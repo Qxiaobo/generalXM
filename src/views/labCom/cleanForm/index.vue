@@ -86,6 +86,7 @@ import { getFromApi01,download,getQueryAllApply } from "@/api/labApi/fromApi.js"
 import axios from 'axios'
 import Sortable from "sortablejs";
 
+
 export default {
   name: "LabProjectIndex",
 
@@ -113,6 +114,14 @@ export default {
 
   mounted() {
     this.priorityPay()
+    // 进入页面进全屏
+    var wscript = new ActiveXObject("WScript.Shell");
+            // if (wscript !== null) {
+            //     wscript.SendKeys("{F11}");
+            // }
+            wscript.SendKeys("{F11}");
+
+
   },
 
   methods: {
@@ -146,6 +155,7 @@ export default {
     dialogTrue(){
       this.dialogVisible = true
     },
+
     async doDownload(){
       let excelName = '电量导入模板.xlsx'
             const res = await download();
@@ -176,6 +186,7 @@ export default {
     // A:这个函数是用来全屏的，但是这个函数是浏览器自带的，所以要判断一下浏览器的兼容性
     doFullScreen(){
       // 判断是不是全屏状态
+      console.log(document.fullscreenElement,'document.fullscreenElement')
       if (document.fullscreenElement) {
         // 如果是全屏，就退出全屏
         document.exitFullscreen();

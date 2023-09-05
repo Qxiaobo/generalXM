@@ -30,6 +30,12 @@ export default {
     }
   },
   mounted() {
+    // this.requestFullScreen()
+    // this.$nextTick(() => {
+    //   document.documentElement.webkitRequestFullScreen()
+    // this.requestFullScreen()
+// this.enterFullscreen()
+    // })
     // registerMicroApps([{
     //   name: 'my-microapp',
     //   entry: 'http://localhost:8080',
@@ -38,7 +44,33 @@ export default {
     // }]);
 
     // start();
+  },
+  methods:{
+    requestFullScreen(){
+      var de = document.documentElement;
+      if (de.requestFullscreen) {
+        de.requestFullscreen();
+      } else if (de.mozRequestFullScreen) {
+        de.mozRequestFullScreen();
+      } else if (de.webkitRequestFullScreen) {
+        de.webkitRequestFullScreen();
+      }
+    },
+    enterFullscreen() {
+      const element = document.documentElement;
+
+      if (element.requestFullscreen) {
+        element.requestFullscreen();
+      } else if (element.mozRequestFullScreen) { // Firefox
+        element.mozRequestFullScreen();
+      } else if (element.webkitRequestFullscreen) { // Chrome, Safari and Opera
+        element.webkitRequestFullscreen();
+      } else if (element.msRequestFullscreen) { // Internet Explorer
+        element.msRequestFullscreen();
+      }
+    }
   }
+  
 }
 </script>
 

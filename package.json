@@ -8,6 +8,8 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@antv/g6": "^4.8.21",
+    "@antv/x6": "^2.13.1",
     "@micro-zoe/micro-app": "^0.8.10",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.0-rc.3",
     "@tinymce/tinymce-vue": "3.2.8",
