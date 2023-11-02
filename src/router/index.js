@@ -196,6 +196,13 @@ const routes = [
         icon:'m-gundongwenzi',
         component: () => import("@/views/labCom/echatsTest/index.vue"),
       },
+      {
+        path: "lab-canvas",
+        name: "lab-canvas",
+        title: "canvas练习",
+        icon:'m-gundongwenzi',
+        component: () => import("@/views/labCom/lab-canvas/index.vue"),
+      },
       // {
       //   path: "commonTest",
       //   name: "commonTest",

@@ -1,5 +1,5 @@
 <template>
-    <div style="background: #05232b;height: 6000px;">
+    <div style="background: #05232b;">
         <div id="container"></div>
     </div>
 </template>
@@ -259,4 +259,10 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+#container{
+    transform: rotateZ(45deg) skew(-15deg,-15deg);
+
+}
+
+</style>
