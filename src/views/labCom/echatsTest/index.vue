@@ -260,9 +260,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-#container{
-    transform: rotateZ(45deg) skew(-15deg,-15deg);
+// #container{
+//     transform: rotateZ(45deg) skew(-15deg,-15deg);
 
-}
+// }
 
 </style>

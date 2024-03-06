@@ -4,9 +4,17 @@
         </SelectAdd>
         <el-divider content-position="left">
             输入框新增选项</el-divider>
-        <inputIp clearable v-model="ip" ></inputIp>
+        <inputIp clearable v-model="ip"></inputIp>
         <el-divider content-position="left">
-            ip输入框>>> 参数配置：【v-model：绑定数据】，【disabled：是否禁用】，【clearable：是否可清空】，【readonly：是否只读】，【size：大小】，【formatStyle：返回格式(node/noNode-->noNode不带·)】   </el-divider>
+            ip输入框>>>
+            参数配置：【v-model：绑定数据】，【disabled：是否禁用】，【clearable：是否可清空】，【readonly：是否只读】，【size：大小】，【formatStyle：返回格式(node/noNode-->noNode不带·)】
+        </el-divider>
+
+        <pinyinSearch />
+        <el-divider content-position="left">
+           模糊查询,支持拼音首字母查询
+        </el-divider>
+
     </el-card>
 </template>
 

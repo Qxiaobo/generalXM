@@ -63,12 +63,71 @@
     <div  style="width: 200px;height: 200px;background:#ccc;" v-clickOutside="clickoutside" @click="click"  >
 
     </div>
+    <div style="padding-left:30px">
+      <br/>step: {
+      <br/>  // 数值越大速度滚动越快
+      <br/>  type: Number,
+      <br/>  default: 0.2
+      <br/>},
+      <br/>limitMoveNum: {
+      <br/>  // 开始无缝滚动的数据量 this.dataList.length
+      <br/>  type: Number,
+      <br/>  default: 2
+      <br/>},
+      <br/>hoverStop: {
+      <br/>  // 是否开启鼠标悬停stop
+      <br/>  type: Boolean,
+      <br/>  default: true
+      <br/>},
+      <br/>direction: {
+      <br/>  // 0向下 1向上 2向左 3向右
+      <br/>  type: Number,
+      <br/>  default: 1,
+      <br/>  validator(val) {
+      <br/>    return val === 0 || val === 1 || val === 2 || val === 3;
+      <br/>  }
+      <br/>},
+      <br/>openWatch: {
+      <br/>  // 开启数据实时监控刷新dom
+      <br/>  type: Boolean,
+      <br/>  default: true
+      <br/>},
+      <br/>singleHeight: {
+      <br/>  // 单步运动停止的高度(默认值0是无缝不停止的滚动) direction => 0/1
+      <br/>  type: Number,
+      <br/>  default: 0
+      <br/>},
+      <br/>singleWidth: {
+      <br/>  // 单步运动停止的宽度(默认值0是无缝不停止的滚动) direction => 2/3
+      <br/>  type: Number,
+      <br/>  default: 0
+      <br/>},
+      <br/>waitTime: {
+      <br/>  // 单步运动停止的时间(默认值1000ms)
+      <br/>  type: Number,
+      <br/>  default: 1000
+      <br/>}</div>
+    <div style="background: red; height: 300px;overflow: hidden;margin-top: 50px;" >
+      <ScrollMessage>
+            <div v-for="i in 6" :key="i" >
+                <el-button type="primary"> 测试{{ i }}}</el-button>
+            </div>
+    
+        </ScrollMessage>
+        
+    </div>
+
     </div>
   </template>
   
   <script>
+import ScrollMessage from '@/components/ScrollMessage/index';
+
   export default {
     name: "myTextName",
+    components: {
+        ScrollMessage
+    },
     data() {
       return {
         textArr: [

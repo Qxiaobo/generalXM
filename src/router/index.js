@@ -203,6 +203,13 @@ const routes = [
         icon:'m-gundongwenzi',
         component: () => import("@/views/labCom/lab-canvas/index.vue"),
       },
+      {
+        path: "lab-scrollMessage",
+        name: "lab-scrollMessage",
+        title: "scrollMessage滚动",
+        icon:'m-gundongwenzi',
+        component: () => import("@/views/labCom/lab-scrollMessage/index.vue"),
+      },
       // {
       //   path: "commonTest",
       //   name: "commonTest",
