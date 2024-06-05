@@ -1,0 +1,100 @@
+{
+  "id": "3280386",
+  "name": "no name",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "39904283",
+      "name": "lab-return-right",
+      "font_class": "md-return-right1",
+      "unicode": "e614",
+      "unicode_decimal": 58900
+    },
+    {
+      "icon_id": "30429912",
+      "name": "点赞",
+      "font_class": "dianzan",
+      "unicode": "e60e",
+      "unicode_decimal": 58894
+    },
+    {
+      "icon_id": "28075306",
+      "name": "10-右",
+      "font_class": "a-10-you",
+      "unicode": "e8cf",
+      "unicode_decimal": 59599
+    },
+    {
+      "icon_id": "28504810",
+      "name": "md-refresh",
+      "font_class": "md-refresh",
+      "unicode": "e65d",
+      "unicode_decimal": 58973
+    },
+    {
+      "icon_id": "28504817",
+      "name": "md-return-right",
+      "font_class": "md-return-right",
+      "unicode": "e65e",
+      "unicode_decimal": 58974
+    },
+    {
+      "icon_id": "28504819",
+      "name": "md-return-left",
+      "font_class": "md-return-left",
+      "unicode": "e65f",
+      "unicode_decimal": 58975
+    },
+    {
+      "icon_id": "28504820",
+      "name": "md-rewind",
+      "font_class": "md-rewind",
+      "unicode": "e660",
+      "unicode_decimal": 58976
+    },
+    {
+      "icon_id": "28504828",
+      "name": "md-send",
+      "font_class": "md-send",
+      "unicode": "e661",
+      "unicode_decimal": 58977
+    },
+    {
+      "icon_id": "28504833",
+      "name": "md-shuffle",
+      "font_class": "md-shuffle",
+      "unicode": "e662",
+      "unicode_decimal": 58978
+    },
+    {
+      "icon_id": "28480124",
+      "name": "打印机",
+      "font_class": "dayinji",
+      "unicode": "e659",
+      "unicode_decimal": 58969
+    },
+    {
+      "icon_id": "28480134",
+      "name": "减",
+      "font_class": "jian",
+      "unicode": "e65a",
+      "unicode_decimal": 58970
+    },
+    {
+      "icon_id": "28480135",
+      "name": "加-1",
+      "font_class": "jia-1",
+      "unicode": "e65b",
+      "unicode_decimal": 58971
+    },
+    {
+      "icon_id": "28480136",
+      "name": "标签",
+      "font_class": "biaoqian",
+      "unicode": "e65c",
+      "unicode_decimal": 58972
+    }
+  ]
+}

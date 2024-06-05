@@ -1,7 +1,7 @@
 <template>
   <div style="height: 790px;" >
     首页
-    <i class="iconfont icon-guanbi"></i>
+    <i class="iconfont icon-md-return-right"></i>
   </div>
 </template>
 <script>

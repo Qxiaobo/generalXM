@@ -40,92 +40,41 @@ value: "orgName" ,noSort:true}} @事件 { getDataInit : {Function()}
       <div class="table-wrap" id="table-wrap" ref="tableWrap">
         <!-- :style="height==='0'?{height:'100%'}:{height:height}"
             :height="height==='0'?'':height" -->
-        <el-table
-          v-loading="loading"
-          ref="crudForm"
-          :row-key="getRowKey"
-          :data="tableData"
-          :summary-method="(e) => totalValue"
-          :show-summary="totalValue.length === 0 ? false : true"
-          @selection-change="handleSelectionChange"
-          @sort-change="sortChange"
-          @cell-click="cellClick"
-          header-row-class-name="table-header"
-          cell-class-name="table-body-td"
-          :cell-style="columnStyle"
-          border
-          stripe
-        >
-          <el-table-column
-            v-if="showIndex"
-            type="index"
-            width="50"
-            align="center"
-          />
-          <el-table-column
-            v-if="showCheckbox"
-            type="selection"
-            width="55"
-            align="center"
-          />
+        <el-table v-loading="loading" ref="crudForm" :row-key="getRowKey" :data="tableData"
+          :summary-method="(e) => totalValue" :show-summary="totalValue.length === 0 ? false : true"
+          @selection-change="handleSelectionChange" @sort-change="sortChange" @cell-click="cellClick"
+          header-row-class-name="table-header" cell-class-name="table-body-td" :cell-style="columnStyle"
+          :row-class-name="rowClassName" border :stripe="isStripe" >
+          <el-table-column v-if="showIndex" type="index" width="50" align="center" />
+          <el-table-column v-if="showCheckbox" type="selection" width="55" align="center" />
 
-          <template
-            v-for="(item, index) in fieldList.filter((item) => !item.hidden)"
-          >
+          <template v-for="(item, index) in fieldList.filter((item) => !item.hidden)">
             <!-- align="center" -->
             <!-- :render-header="renderHeader" -->
-            <el-table-column
-              v-if="item.show"
-              :key="index"
-              :label="item.name"
-              :prop="item.value"
-              :width="item.width"
-              show="true"
-              :sortable="item.noSort ? false : 'custom'"
-              :formatter="item.formatter ? item.formatter : null"
-              :sort-by="item.sortBy ? item.sortBy : item.value"
-              show-tooltip-when-overflow
-            >
+            <el-table-column v-if="item.show" :key="index" :label="item.name" :prop="item.value" :width="item.width"
+              show="true" :sortable="item.noSort ? false : 'custom'" :formatter="item.formatter ? item.formatter : null"
+              :sort-by="item.sortBy ? item.sortBy : item.value" show-tooltip-when-overflow>
               <template slot-scope="scope">
-                <el-button
-                  class="click_cell"
-                  v-if="item.type === 'link'"
-                  type="text"
-                  size="small"
-                  @click="item.clickFn(scope.row)"
-                  >{{
-                    item.formatter
-                      ? item.formatter(scope.row)
-                      : scope.row[item.value]
-                  }}</el-button
-                >
-                <el-input
-                  v-else-if="item.type === 'input'"
-                  v-model="scope.row[item.value]"
-                  size="mini"
-                ></el-input>
-                <a
-                  v-else-if="item.type === 'aLink'"
-                  :href="scope.row[item.url]"
-                  :download="scope.row[item.value]"
-                  >{{ scope.row[item.value] }}</a
-                >
+                <el-button class="click_cell" v-if="item.type === 'link'" type="text" size="small"
+                  @click="item.clickFn(scope.row)">{{
+        item.formatter
+          ? item.formatter(scope.row)
+          : scope.row[item.value]
+      }}</el-button>
+                <el-input v-else-if="item.type === 'input'" v-model="scope.row[item.value]" size="mini"></el-input>
+                <a v-else-if="item.type === 'aLink'" :href="scope.row[item.url]" :download="scope.row[item.value]">{{
+        scope.row[item.value] }}</a>
                 <template v-else>{{
-                  item.formatter
-                    ? item.formatter(scope.row)
-                    : scope.row[item.value]
-                }}</template>
+        item.formatter
+          ? item.formatter(scope.row)
+          : scope.row[item.value]
+      }}</template>
               </template>
             </el-table-column>
           </template>
 
-          <el-table-column
-            :fixed="fixed"
-            :width="tableOptionWidth"
-            :label="tableOptionName"
-            align="left"
-            v-if="showColumnHandle"
-          >
+          <el-table-column :fixed="fixed" :width="tableOptionWidth" :label="tableOptionName" align="left"
+            v-if="showColumnHandle">
             <template slot-scope="scope">
               <slot name="tableOption" :row="scope.row" />
             </template>
@@ -133,32 +82,12 @@ value: "orgName" ,noSort:true}} @事件 { getDataInit : {Function()}
 
           <el-table-column width="40" :fixed="fixed" v-if="showColumnSetting">
             <template slot="header">
-              <el-popover
-                placement="bottom"
-                min-width="80"
-                trigger="click"
-                popper-class="col-setting-popover"
-              >
-                <el-button
-                  class="set_btn"
-                  slot="reference"
-                  type="text"
-                  icon="el-icon-setting"
-                  style="padding: 0; border-color: #f1f1f1"
-                  title="展示列设置"
-                ></el-button>
+              <el-popover placement="bottom" min-width="80" trigger="click" popper-class="col-setting-popover">
+                <el-button class="set_btn" slot="reference" type="text" icon="el-icon-setting"
+                  style="padding: 0; border-color: #f1f1f1" title="展示列设置"></el-button>
                 <div class="col-setting-title">展示列设置</div>
-                <el-checkbox-group
-                  v-model="colOptions"
-                  :min="1"
-                  class="col-setting-group"
-                >
-                  <el-checkbox
-                    v-for="item in colSelect"
-                    :label="item"
-                    :key="item"
-                    >{{ item }}</el-checkbox
-                  >
+                <el-checkbox-group v-model="colOptions" :min="1" class="col-setting-group">
+                  <el-checkbox v-for="item in colSelect" :label="item" :key="item">{{ item }}</el-checkbox>
                 </el-checkbox-group>
               </el-popover>
             </template>
@@ -167,34 +96,19 @@ value: "orgName" ,noSort:true}} @事件 { getDataInit : {Function()}
       </div>
     </div>
     <div class="dialogPage" v-if="dialogPage" ref="page">
-      <el-pagination
-        :current-page.sync="listInfo.query.current"
-        :page-size="listInfo.query.size"
-        :total="listInfo.pageTotal"
-        :page-sizes="[10, 20, 30, 40, 50, 100]"
-        layout="total, sizes, prev, pager, next, jumper, slot"
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
-      >
+      <el-pagination :current-page.sync="listInfo.query.current" :page-size="listInfo.query.size"
+        :total="listInfo.pageTotal" :page-sizes="[10, 20, 30, 40, 50, 100]"
+        layout="total, sizes, prev, pager, next, jumper, slot" @size-change="handleSizeChange"
+        @current-change="handleCurrentChange">
         <span class="el-pagination__jump page-option-wrap">
           <span v-if="showExportBtn">
-            <a
-              class="el-icon-upload2 page-option-icon"
-              href="javascript:;"
-              @click="exportTable"
-              title="导出"
-            >
+            <a class="el-icon-upload2 page-option-icon" href="javascript:;" @click="exportTable" title="导出">
             </a>
             <i class="split-line"></i>
           </span>
 
           <span>
-            <a
-              class="el-icon-refresh page-option-icon"
-              href="javascript:;"
-              @click="refresh"
-              title="刷新"
-            >
+            <a class="el-icon-refresh page-option-icon" href="javascript:;" @click="refresh" title="刷新">
             </a>
           </span>
         </span>
@@ -202,34 +116,18 @@ value: "orgName" ,noSort:true}} @事件 { getDataInit : {Function()}
     </div>
     <!-- 分页 -->
     <div class="page-wrap-fixed" v-if="page" id="page-wrap-fixed" ref="page">
-      <el-pagination
-        :current-page.sync="listInfo.query.current"
-        :page-size="listInfo.query.size"
-        :total="listInfo.pageTotal"
-        :page-sizes="pageSizesCount"
-        layout="total, sizes, prev, pager, next, jumper, slot"
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
-      >
+      <el-pagination :current-page.sync="listInfo.query.current" :page-size="listInfo.query.size"
+        :total="listInfo.pageTotal" :page-sizes="pageSizesCount" layout="total, sizes, prev, pager, next, jumper, slot"
+        @size-change="handleSizeChange" @current-change="handleCurrentChange">
         <span class="el-pagination__jump page-option-wrap">
           <span>
-            <a
-              class="page-option-icon"
-              href="javascript:;"
-              @click="refresh"
-              title="刷新"
-            >
+            <a class="page-option-icon" href="javascript:;" @click="refresh" title="刷新">
               <!-- <img src="@static/img/7.png" /> -->
             </a>
           </span>
           <span v-if="showExportBtn">
             <i class="split-line"></i>
-            <a
-              class="page-option-icon"
-              href="javascript:;"
-              @click="exportTable"
-              title="导出"
-            >
+            <a class="page-option-icon" href="javascript:;" @click="exportTable" title="导出">
               <!-- <img src="@static/img/8.png" /> -->
             </a>
           </span>
@@ -252,6 +150,11 @@ export default {
       type: String,
       default: () => "0",
     },
+    // 是否是斑马纹
+    isStripe: {
+      type: Boolean,
+      default: true,
+    },
     // 接收一个数组。表示有合计
     totalValue: {
       type: Array,
@@ -265,7 +168,7 @@ export default {
     // 查询条件
     queryParam: {
       type: Object,
-      default: () => {},
+      default: () => { },
     },
     // 获取数据的接口
     api: {
@@ -377,6 +280,7 @@ export default {
         },
       },
       pazeSizesCount1: [10, 20, 30, 40, 50, 100],
+      colors: ["255, 0, 0", "0, 255, 0", "0, 0, 255", "255, 255, 0"], // 颜色数组
     };
   },
   created() {
@@ -403,6 +307,9 @@ export default {
       }
       this.colOptions.push(this.fieldList[i].name);
     }
+    // setTimeout(() => {
+    //   this.updateRowColors();
+    //   },0);
   },
   computed: {},
   watch: {
@@ -468,6 +375,39 @@ export default {
         },
       });
     },
+    updateRowColors() {
+      // 为每一行动态添加颜色
+      // this.tableData = this.tableData.map((item, index) => {
+      //   return {
+      //     ...item,
+      //     color: this.colors[index % this.colors.length], // 循环使用颜色数组
+      //   };
+      // });
+      // console.log(this.tableData, "this.tableData");
+
+      // this.$nextTick(() => {
+      //   const rows = this.$refs.crudForm.$el.querySelectorAll(".flicker");
+      //   rows.forEach((row, index) => {
+      //     const color = this.tableData[index * 2 + 1]?.color; // 因为是奇数行
+      //     if (color) {
+      //       row.style.setProperty("--flicker-color", color);
+      //     }
+      //   })
+      // });
+
+
+
+
+    },
+    rowClassName({ row, rowIndex }) {
+      if (rowIndex % 2 === 1) {
+        return "flicker-blue";
+      } else {
+        return "flicker-red";
+      }
+      //
+    },
+
     // 行拖拽
     // 个人认为行拖拽不用加，因为加了以后，就不能双击选行单元格的文字了，当然还是要听产品大佬安排
     rowDropInit() {
@@ -572,6 +512,7 @@ export default {
                 this.listInfo.query.size = d.stationInfos.size;
                 this.listInfo.query.current = d.stationInfos.current;
               }
+              this.updateRowColors();
             } else if (res.mesg) {
               this.$message.error(res.mesg);
             } else {
@@ -647,33 +588,83 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-// .pagetable {
-//     position: absolute;
-//     bottom: 0;
-//     left: 50%;
-//     transform: translate(-50%, 0%);
-//     width: 100%;
-//     height: 40px;
-//     background-color: #f1f1f1;
-//     .el-pagination {
-//         position: absolute;
-//         top: 50%;
-//         left: 50%;
-//         transform: translate(-50%, -50%);
-//         span,
-//         a {
-//             display: inline-block;
-//         }
-//         a {
-//             width: 20px;
-//             height: 23px;
-//             color: #1396c2;
-//             font-size: 14px;
-//             font-weight: 800;
-//             margin-right: 16px;
-//         }
-//     }
-// }
+::v-deep .el-table--striped .el-table__body tr.el-table__row--striped td.el-table__cell {
+  background-color: transparent;
+}
+::v-deep .el-table__body .el-table__row.hover-row td {
+	background-color: transparent
+}
+/* CSS */
+::v-deep {
+  .flicker-blue {
+    --flicker-color: 0, 0, 255;
+    box-shadow: 0 0 6px 2px rgba(var(--flicker-color), 1) inset;
+    transition: all 2.5s cubic-bezier(0.42, 0, 0.58, 1);
+    animation: flickerAnimation 2.5s infinite;
+  }
+
+  .flicker-red {
+    --flicker-color: 255, 0, 0;
+    box-shadow: 0 0 6px 2px rgba(var(--flicker-color), 1) inset;
+    transition: all 2.5s cubic-bezier(0.42, 0, 0.58, 1);
+    animation: flickerAnimation 2.5s infinite;
+  }
+
+  .flicker-green {
+    --flicker-color: 0, 255, 0;
+    box-shadow: 0 0 6px 2px rgba(var(--flicker-color), 1) inset;
+    transition: all 2.5s cubic-bewier(0.42, 0, 0.58, 1);
+    animation: flickerAnimation 2.5s infinite;
+  }
+
+  @keyframes flickerAnimation {
+
+    /* Animation styles */
+    0%,
+    100% {
+      box-shadow: 0 0 5px 0px rgba(var(--flicker-color), 0.7) inset;
+    }
+
+    10% {
+      box-shadow: 0 0 6px 2px rgba(var(--flicker-color), 0.65) inset;
+    }
+
+    20% {
+      box-shadow: 0 0 8px 4px rgba(var(--flicker-color), 0.6) inset;
+    }
+
+    30% {
+      box-shadow: 0 0 10px 6px rgba(var(--flicker-color), 0.5) inset;
+    }
+
+    40% {
+      box-shadow: 0 0 12px 8px rgba(var(--flicker-color), 0.4) inset;
+    }
+
+    50% {
+      box-shadow: 0 0 14px 10px rgba(var(--flicker-color), 0.4) inset;
+    }
+
+    60% {
+      box-shadow: 0 0 12px 8px rgba(var(--flicker-color), 0.5) inset;
+    }
+
+    70% {
+      box-shadow: 0 0 10px 6px rgba(var(--flicker-color), 0.6) inset;
+    }
+
+    80% {
+      box-shadow: 0 0 8px 4px rgba(var(--flicker-color), 0.65) inset;
+    }
+
+    90% {
+      box-shadow: 0 0 6px 2px rgba(var(--flicker-color), 0.6) inset;
+    }
+  }
+}
+
+
+
 .dialogPage {
   padding: 10px 0;
   text-align: center;
@@ -729,7 +720,7 @@ export default {
   .left {
     float: left;
 
-    >>> .el-button--primary {
+    >>>.el-button--primary {
       width: 120px;
       height: 32px;
       border-radius: 2px;
@@ -739,7 +730,7 @@ export default {
   .right {
     float: right;
 
-    >>> .el-button {
+    >>>.el-button {
       width: 120px;
       height: 32px;
       border-radius: 2px;
@@ -776,7 +767,7 @@ export default {
   font-size: 13px !important;
 }
 
-.table-wrap >>> .table-header {
+.table-wrap>>>.table-header {
   background-color: #f1f1f1;
   color: #232323;
   font-weight: bold;
@@ -786,15 +777,12 @@ export default {
   }
 }
 
-.table-wrap >>> .table-body-td {
+.table-wrap>>>.table-body-td {
   color: #232323;
   padding: 3px 0;
 }
 
->>> .el-table--striped
-  .el-table__body
-  tr.el-table__row--striped.el-table__row--striped.el-table__row--striped
-  td {
+>>>.el-table--striped .el-table__body tr.el-table__row--striped.el-table__row--striped.el-table__row--striped td {
   background-color: #f7f7f7 !important;
   /*替换为你需要的颜色，觉得优先级不够就加!important*/
 }
@@ -806,9 +794,11 @@ export default {
 ::v-deep .el-table td div {
   display: inline-block;
 }
-::v-deep .el-table{
+
+::v-deep .el-table {
   cursor: pointer;
 }
+
 ::v-deep .el-upload-list {
   display: none;
 }

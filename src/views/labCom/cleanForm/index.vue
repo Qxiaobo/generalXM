@@ -14,6 +14,7 @@
         ref="queryStaSumDetails"
         :page="false"
         :dialogPage="true"
+        :isStripe="false"
       >
       <template slot="searchBar">
         <!-- 这里是写搜索表单的地方 -->
@@ -125,6 +126,14 @@ export default {
   },
 
   methods: {
+    doTableOption(row){
+      console.log(row)
+      // 关闭动画
+      // document.querySelector('.el-table__row').classList.remove('flicker-blue')
+      // document.querySelector('.el-table__row').classList.remove('flicker-red')
+
+      // document.querySelector('.el-table__row').classList.remove('flicker-green')
+    },
     priorityPay() {
       //第一步，获取拖动容器
       var wrap = document.getElementById("wrapBox");
@@ -221,4 +230,5 @@ export default {
 #wrapBox div:active {
   background-color: #eee;
 }
+
 </style>

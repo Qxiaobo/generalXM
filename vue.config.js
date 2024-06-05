@@ -1,33 +1,24 @@
-const { defineConfig } = require('@vue/cli-service')
+const { defineConfig } = require("@vue/cli-service");
+const webpack = require("webpack");
+
 module.exports = defineConfig({
   transpileDependencies: true,
+  configureWebpack: {
+    plugins: [
+      new webpack.ProvidePlugin({
+        QRCode: "qrcode", //忽略引入qrcode库
+      }),
+    ],
+  },
+  // // 1.关闭sourceMap
+  // productionSourceMap: false,
+  // // 2.关闭lintOnSave
+  // lintOnSave: false,
+  // // 3.配置webpack
+
   devServer: {
     headers: {
-      'Access-Control-Allow-Origin': '*',
+      "Access-Control-Allow-Origin": "*",
     },
-    // historyApiFallback: true,
-    // allowedHosts: 'all',
-    // port: 9528,
-    //   // host: '192.168.0.51',
-    // open: true,
-    // proxy: {
-    //   "/": {
-    //     // target: "https://sdd.cevmp.cn/",
-    //     // target: "http://192.168.99.112:9999",
-    //     target: "https://jsgsn.cevmp.cn",
-    //     // target: "http://10.168.1.237:9999",
-    //     secure: false,
-    //     changeOrigin: true,
-    //     open: true,
-    //     ws: false,
-    //     headers: {
-    //       'Access-Control-Allow-Origin': '*',
-    //       referer:"https://jsgsn.cevmp.cn/subsidy/"
-    //     }
-    //     // pathRewrite: {
-    //     //   '^/api': ''
-    //     // }
-    //   },
-    // },
   },
-})
+});

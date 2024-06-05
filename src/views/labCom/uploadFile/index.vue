@@ -5,7 +5,6 @@
       <el-divider></el-divider>
       <FileUpload :individual="true" :url="'http://192.168.0.110:8080/add/file'" :fileData="fileData"></FileUpload>
       <el-divider></el-divider>
-
       <FileUploadS :url="'http://192.168.0.110:8080/add/file'" :fileData="fileData"></FileUploadS>
       <el-divider></el-divider>
       <el-upload class="upload-demo" action="" ref="upload" :on-change="handleChange" :file-list="fileListUpload"
@@ -48,6 +47,7 @@
 import FileUploadS from "@/components/fileUpload/indexNum.vue";
 import tablequery1 from "@/components/TableQueryNew/index.vue";
 import download from "@/utils/xlsxFile";
+
 export default {
   name: "LabProjectIndex",
   components: {

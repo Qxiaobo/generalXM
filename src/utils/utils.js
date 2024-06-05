@@ -59,3 +59,16 @@ export function fillProps(obj, props) {
     }
   })
 }
+
+
+/**
+* @name: playSound
+ * @description: 播放媒体声音
+ * @param {type} 媒体的地址
+ * @return {type} --
+ */
+// src/utils/playSound.js
+export function playSound(filePath) {
+  const sound = new Audio(filePath);
+  sound.play();
+}
