@@ -1,6 +1,8 @@
 <template>
   <div>
     <el-card class="box-card">
+      <button @click="downloadFile">下载表格</button>
+      <el-button @click="searchTable">查询</el-button>
       <CleanForm
         :tableOptionWidth="200"
         :showCheckbox="true"
@@ -49,6 +51,8 @@
       <template slot="tableTopOptionRight" >
         <!-- 这里是写表格上方的按钮 -->
         <el-button class="newButtonColor SearchBTN" @click="dialogTrue" >表格右侧的插槽</el-button>
+       
+
       </template>
       <template #tableOption="{row}">
               <!-- <slot name="tableOption" @click="doTableOption(row)" /> -->
@@ -61,7 +65,13 @@
       <div data-id="3中国银行">中国银行</div>
       <div data-id="4农业银行">农业银行</div>
       <div data-id="5交通银行">交通银行</div>
+
     </div>
+    <!-- 表格的合并 -->
+    <div class="titleHead">表格的合并</div>
+    <el-divider/>
+
+    <tableMerge></tableMerge>
     </el-card>
     <el-dialog
   title="提示"
@@ -83,6 +93,7 @@
 
 <script>
 import "@/mock/labMock/index.js";
+import tableMerge from "./components/tableMerge.vue";
 import { getFromApi01,download,getQueryAllApply } from "@/api/labApi/fromApi.js";
 import axios from 'axios'
 import Sortable from "sortablejs";
@@ -90,7 +101,7 @@ import Sortable from "sortablejs";
 
 export default {
   name: "LabProjectIndex",
-
+  components:{tableMerge} ,
   data() {
     return {
       getFromApi01,
@@ -126,6 +137,23 @@ export default {
   },
 
   methods: {
+    searchTable(){
+      this.$nextTick(()=>{
+        this.$refs.queryStaSumDetails.getDataInit()
+      })
+    },
+    downloadFile() {
+   // 使用require来引用文件路径
+  // 直接引用public目录中的文件
+  const fileUrl = '/cc.xlsx';
+      const link = document.createElement('a');
+      link.href = fileUrl;
+      link.download = 'cc.xlsx';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    
+    },
     doTableOption(row){
       console.log(row)
       // 关闭动画

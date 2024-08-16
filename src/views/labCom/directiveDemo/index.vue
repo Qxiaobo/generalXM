@@ -211,11 +211,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.titleHead {
-  color: rgba(64, 158, 255);
-  font-size: 32px;
-  font-weight: 700;
-}
 
 .itemDemo {
   padding: 10px;

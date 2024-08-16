@@ -210,13 +210,21 @@ const routes = [
         icon:'m-gundongwenzi',
         component: () => import("@/views/labCom/lab-scrollMessage/index.vue"),
       },
-      // {
-      //   path: "commonTest",
-      //   name: "commonTest",
-      //   title: "公共测试",
-      //   icon:'m-gundongwenzi',
-      //   component: () => import("@/views/labCom/echatsTest/index.vue"),
-      // }
+      {
+        path: "powerOutageMonitoring220kV",
+        name: "powerOutageMonitoring220kV",
+        title: "powerOutageMonitoring220kV",
+        // isHidden:true,
+        icon:'m-gundongwenzi',
+        component: () => import("@/views/labCom/powerOutageMonitoring220kV/components/htTest.vue"),
+      },
+      {
+        path: "commonTest",
+        name: "commonTest",
+        title: "公共测试",
+        icon:'m-gundongwenzi',
+        component: () => import("@/views/labCom/echatsTest/index.vue"),
+      }
     ],
   },
 ];

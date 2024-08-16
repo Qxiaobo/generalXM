@@ -24,9 +24,13 @@
                 <span slot="title" class="menu-title">{{ item.title }}</span>
               </template>
               <el-menu-item :index="'/' + j.path" @click="toEveryRouter(j)" :title="j.title"
-                v-for="(j, i) in item.children" :key="i" class="everyRouter"> <svg class="icon" aria-hidden="true">
-                  <use :xlink:href="`#icon-${j.icon}`"></use>
-                </svg>{{ j.title }}
+                v-for="(j, i) in item.children" :key="i" class="everyRouter">
+                <template v-if="!j.isHidden">
+                  <svg class="icon" aria-hidden="true">
+                    <use :xlink:href="`#icon-${j.icon}`"></use>
+                  </svg>{{ j.title }}
+                </template>
+
               </el-menu-item>
             </el-submenu>
           </el-menu>

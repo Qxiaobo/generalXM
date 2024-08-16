@@ -259,6 +259,8 @@ export default {
   components: {},
   data() {
     return {
+    // 是否开启闪烁
+    isFlicker:true,
       sortable: null,
       loading: false,
       colOptions: [],
@@ -307,9 +309,7 @@ export default {
       }
       this.colOptions.push(this.fieldList[i].name);
     }
-    // setTimeout(() => {
-    //   this.updateRowColors();
-    //   },0);
+
   },
   computed: {},
   watch: {
@@ -375,35 +375,14 @@ export default {
         },
       });
     },
-    updateRowColors() {
-      // 为每一行动态添加颜色
-      // this.tableData = this.tableData.map((item, index) => {
-      //   return {
-      //     ...item,
-      //     color: this.colors[index % this.colors.length], // 循环使用颜色数组
-      //   };
-      // });
-      // console.log(this.tableData, "this.tableData");
 
-      // this.$nextTick(() => {
-      //   const rows = this.$refs.crudForm.$el.querySelectorAll(".flicker");
-      //   rows.forEach((row, index) => {
-      //     const color = this.tableData[index * 2 + 1]?.color; // 因为是奇数行
-      //     if (color) {
-      //       row.style.setProperty("--flicker-color", color);
-      //     }
-      //   })
-      // });
-
-
-
-
-    },
     rowClassName({ row, rowIndex }) {
-      if (rowIndex % 2 === 1) {
-        return "flicker-blue";
-      } else {
-        return "flicker-red";
+      if(this.isFlicker){
+        if (rowIndex % 2 === 1) {
+          return "flicker-blue";
+        } else {
+          return "flicker-red";
+        }
       }
       //
     },
@@ -512,7 +491,6 @@ export default {
                 this.listInfo.query.size = d.stationInfos.size;
                 this.listInfo.query.current = d.stationInfos.current;
               }
-              this.updateRowColors();
             } else if (res.mesg) {
               this.$message.error(res.mesg);
             } else {

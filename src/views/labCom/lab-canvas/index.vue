@@ -1,381 +1,363 @@
 <template>
-  <div class="hello">
-     <!-- <vue-seamless-scroll :data="listData"  :class-option="classOption"  ref="seamlessScroll" @ScrollEnd="ScrollEnd">
-        <ul >
-            <li v-for="item in listData" :key="item.index">
-                <span  v-text="item.title"></span><span  v-text="item.date"></span>
-            </li>
-        </ul>
-    </vue-seamless-scroll> -->
+  <div class="container">
+  <div class="btn">
+    <div class="btn-left">
+      <div class="item reportAble">可上报</div>
+      <div class="item notReportAble">不可上报</div>
+      <div class="item reported">已上报</div>
+      <div class="item occupied">已占用</div>
+      <div class="item currentlySelected">当前选中</div>
+      <div class="item cancelReporting">取消上报</div>
+    </div>
+    <div class="btn-right">
+      <!-- <el-button type="primary" @click="reporting">上报</el-button>
+      <el-button type="danger" @click="cancelReporting">取消上报</el-button> -->
+    </div>
   </div>
-  
+  <div class="wrap">
+    <div class="left">
+      <div class="merge-column"><span class="title1">日期</span><br><span class="title2">时间</span></div>
+      <div v-for="(item, index) in leftTime" :key="index" class="td-title">{{ item.time }}</div>
+    </div>
+    <div class="right">
+      <div class="top">
+        <div v-for="(item, index) in dataItem" ref="day" :key="index" class="day">{{ item.day }}</div>
+      </div>
+      <div class="bottom" @mousedown="handleMouseDown" @contextmenu="handleContextMenu">
+        <div
+          v-show="positionList.is_show_mask"
+          :style="'width:' + mask_width + 'left:' + mask_left + 'height:' + mask_height + 'top:' + mask_top"
+          class="mask"
+        />
+        <div class="area">
+          <div v-for="(item, index) in dataItem" :key="index" class="area-item">
+            <div
+              v-for="(childItem, idx) in item.data"
+              :key="idx"
+              class="select-item"
+              :x="index"
+              :y="idx"
+              :class="{ currentlySelected: childItem.status == 4, notReportAble: childItem.status == 1, reported: childItem.status == 2, occupied: childItem.status == 3, cancelReporting: childItem.status == 5 }"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 </template>
-
 <script>
 export default {
-  name: 'HelloWorld',
-  data () {
+  data() {
     return {
-       step: 0.1, // 数值越大速度滚动越快
-        limitMoveNum: 1, // 开始无缝滚动的数据量 this.dataList.length
-        hoverStop: true, // 是否开启鼠标悬停stop
-        direction: 1, // 0向下 1向上 2向左 3向右
-        openWatch: true, // 开启数据实时监控刷新dom
-        singleHeight: 0, // 单步运动停止的高度(默认值0是无缝不停止的滚动) direction => 0/1
-        singleWidth: 0, // 单步运动停止的宽度(默认值0是无缝不停止的滚动) direction => 2/3
-        waitTime: 1000, // 单步运动停时间,
-      listData: [{
-                   'title': '1',
-                   'date': '|||||||||||||||||||||||||||||||||||||||||||'
-                 }, {
-                    'title': '2',
-                      'date': '|||||||||||||||||||||||||||||||||||||||||||'
-                 }, {
-                     'title': '3',
-                    'date': '|||||||||||||||||||||||||||||||||||||||||||'
-                 }, {
-                     'title': '4',
-                      'date': '|||||||||||||||||||||||||||||||||||||||||||'
-                 },{
-                   'title': '5',
-                      'date': '|||||||||||||||||||||||||||||||||||||||||||'
-                 }, {
-                    'title': '6',
-                     'date': '|||||||||||||||||||||||||||||||||||||||||||'
-                 }, {
-                     'title': '7',
-                     'date': '|||||||||||||||||||||||||||||||||||||||||||'
-                 }, {
-                     'title': '8',
-                     'date': '|||||||||||||||||||||||||||||||||||||||||||'
-                 }, {
-                    'title': '9',
-                     'date': '|||||||||||||||||||||||||||||||||||||||||||'
-                 }, {
-                     'title': '10',
-                     'date': '|||||||||||||||||||||||||||||||||||||||||||'
-                 }],
-                 num:9,
-      msg: 'Welcome to Your Vue.js App'
+      leftTime: [], // 左侧时间
+      dataItem: [],
+      positionList: { 
+        is_show_mask: false,
+        box_screen_left: 0, // 盒子距离浏览器左侧的距离
+        box_screen_top: 0, // 盒子距离浏览器顶部的距离
+        start_x: 0,
+        start_y: 0,
+        end_x: 0,
+        end_y: 0
+      },
+      areaWith: '',
     }
   },
   computed: {
-    classOption() {
-      return {
-        step: 0.5, //数值越大速度滚动越快
-        limitMoveNum:0, //开始无缝滚动的数据量  //this.fourDatata.length
-        hoverStop: true, //是否开启鼠标悬停stop
-        direction: 1, // 0向下 1向上 2向左 3向右
-        openWatch: true, //开启数据实时监控刷新dom
-        singleHeight: 0, //单步运动停止的高度(默认值0是无缝不停止的滚动) direction => 0/1
-        singleWidth: 0, //单步运动停止的宽度(默认值0是无缝不停止的滚动) direction => 2/3
-        waitTime: 1000 //单步运动停止的时间(默认值1000ms)
-      };
-    }
+    mask_width() {
+      return `${Math.abs(this.positionList.end_x - this.positionList.start_x)}px;`
+    },
+    mask_height() {
+      return `${Math.abs(this.positionList.end_y - this.positionList.start_y)}px;`
+    },
+    mask_left() {
+      return `${Math.min(this.positionList.start_x, this.positionList.end_x) - this.positionList.box_screen_left}px;`
+    },
+    mask_top() {
+      return `${Math.min(this.positionList.start_y, this.positionList.end_y) - this.positionList.box_screen_top}px;`
+    },
   },
-  mounted(){
-    this.getzb();
+  mounted() {
+    this.init()
   },
-  methods:{
-    ScrollEnd(){
-      console.log(this.$refs)
-       this.listData=[]
-       for( var j=0;j<=8;j++){
-this.num+=1;
- this.listData.push({
-                   'title': this.num,
-                   'date': '||||||||||||||||||||||||||||||||||||||||||||||||'
-                 })
-       }
-      
-                  this.$refs.seamlessScroll.reset();
-    },
-    change(){
-      console.log(this.$refs)
-       this.listData=[]
-       for( var j=9;j<=20;j++){
-this.num=j;
- this.listData.push({
-                   'title': this.num,
-                   'date': '2017-12-162017-12-162017-12-16'
-                 })
-       }
-      
-                  this.$refs.seamlessScroll.reset();
-    },
-    getzb(){
-      //模拟数据格式，树形
-      let vJson={
-        id:1,
-        name:"1",
-        children:[
-          {
-            id:11,
-            name:"1-1",
-            line:"线路1-1",
-            children:[{
-              id:111,
-              name:"1-1-1",
-              line:"线路1-1-1"
-            },{
-              id:112,
-              name:"1-1-2",
-              line:"线路1-1-2"
-            }]
-          },
-          {
-            id:12,
-            name:"1-2",
-            line:"线路1-2",
-            children:[{
-              id:121,
-              name:"1-2-1",
-              line:"线路1-2-1"
-            }]
-          },
-          {
-            id:13,
-            name:"1-3",
-            line:"线路1-3",
-            children:[{
-              id:131,
-              name:"1-3-1",
-              line:"线路1-3-1"
-            }]
-          },
-          {
-            id:14,
-            name:"1-4",
-            line:"线路1-4",
-            children:[{
-              id:141,
-              name:"1-4-1",
-              line:"线路1-4-1"
-            }]
-          },{
-            id:15,
-            name:"1-5",
-            line:"线路1-5",
-            children:[{
-              id:151,
-              name:"1-5-1",
-              line:"线路1-5-1"
-            },{
-              id:152,
-              name:"1-5-2",
-              line:"线路1-5-2"
-            },{
-              id:153,
-              name:"1-5-3",
-              line:"线路1-5-3"
-            }]
-          },{
-            id:16,
-            name:"1-6",
-            line:"线路1-6",
-            children:[{
-              id:161,
-              name:"1-6-1",
-              line:"线路1-6-1"
-            },{
-              id:162,
-              name:"1-6-2",
-              line:"线路1-6-2"
-            },{
-              id:163,
-              name:"1-6-3",
-              line:"线路1-6-3"
-            }]
-          }
-        ]
-      }
-      // //图标大小相关
-      // //一级图标中心距边长度
-      // let oneSize=4;
-      // //二级图标中心距边长度
-      // let twoSize=2;
-
-      //坐标调整相关
-      //逆时针旋转角度
-      let angle=45
-      //逆时针旋转后y轴压缩比例
-      let flex=1.2
-
-      //图标间距相关
-      //二级图标间距
-      let twoSpace=200;
-      //三级图标间距
-      let threeSpace=100;
-
-      //层级间距相关
-      //一级到二级间距
-      let one2two=250;
-      //二级到三级间距
-      let two2three=150;
-
-       //坐标原点相关
-         // 原点x
-         let zeroX=850.5;
-      //原点y
-      let zeroY=380.5;
-  
-     
-
-      //获取二级总数用于排版分布
-      let totalTSize=vJson.children.length;
-      //整数值
-      let divisible=parseInt(totalTSize/4)
-      //余数值
-      let remainder=totalTSize%4
-       //将整体分为上下左右，定义每边二级和三级的数量
-       let up=divisible;
-      let left=divisible;
-      let down=divisible;
-      let right=divisible;
-      //不能均分的按上左下进行顺序分配
-      if(remainder==1){
-        up+=1;
-      }else if(remainder==2){
-        up+=1;
-        left+=1;
-      }else if(remainder==3){
-        up+=1;
-        left+=1;
-        right+=1;
-      }
-
-      //坐标数组
-      let xy=new Array();
-      if(up>0){
-        xy= xy.concat(this.getXY(up,0,up,"up",twoSpace,one2two,vJson,threeSpace,two2three,zeroX,zeroY,angle,flex))
-      }
-      if(left>0){
-        xy= xy.concat(this.getXY(left,up,up+left,"left",twoSpace,one2two,vJson,threeSpace,two2three,zeroX,zeroY,angle,flex))
-      }
-      if(down>0){
-        xy= xy.concat(this.getXY(down,up+left,up+left+down,"down",twoSpace,one2two,vJson,threeSpace,two2three,zeroX,zeroY,angle,flex))
-      }
-      if(right>0){
-        xy= xy.concat(this.getXY(right,up+left+down,up+left+down+right,"right",twoSpace,one2two,vJson,threeSpace,two2three,zeroX,zeroY,angle,flex))
-      }
-
-console.log(xy)
-    },
-    getXY(totalNum,start,end,direction,twoSpace,one2two,vJson,threeSpace,two2three,zeroX,zeroY,angle,flex){
-      let xy=new Array();
-//二级所需偏移
-let Deviation=(totalNum-1)*(twoSpace/2);
-      //开始计算上方点位坐标
-       //二级图标计数
-       let num=0;
-      for(let i=start;i<end;i++){
-         //二级图标坐标
-         let twoX=0;
-         let twoY=0;
-         if(direction=="up"){
-           twoX=zeroX+num*twoSpace-(Deviation);
-          twoY=zeroY+one2two;
-         }else if(direction=="down"){
-           twoX=zeroX+num*twoSpace-(Deviation);
-          twoY=zeroY-one2two;
-         }else if(direction=="left"){
-           twoX=zeroX-one2two;
-          twoY= zeroY+num*twoSpace-(Deviation);
-         }else if(direction=="right"){
-           twoX=zeroX+one2two;
-          twoY= zeroY+num*twoSpace-(Deviation);
-         }
-        
-        xy.push({x:twoX,y:twoY,name:vJson.children[i].name,source:null})
-        // xy.push(this.deflectionXY(zeroX,zeroY,twoX,twoY,vJson.children[i].name,angle,flex))
-        //开始处理三级图标
-        let children=vJson.children[i].children;
-        let source=vJson.children[i].name;
-        //三级所需偏移
-        let Deviation3=(children.length-1)*(threeSpace/2);
-        //三级图标计数
-        let num3=0;
-        for(let j=0;j<children.length;j++){
-          let threeX=0;
-         let threeY=0;
-          if(direction=="up"){
-             threeX=twoX+num3*threeSpace-(Deviation3);
-          threeY=twoY+two2three;
-         }else if(direction=="down"){
-          threeX=twoX+num3*threeSpace-(Deviation3);
-          threeY=twoY-two2three;
-         }else if(direction=="left"){
-          threeX=twoX-two2three ;
-          threeY=twoY+num3*threeSpace-(Deviation3);
-         }else if(direction=="right"){
-          threeX=twoX+two2three ;
-          threeY=twoY+num3*threeSpace-(Deviation3);
-         }
-          
-        xy.push({x:threeX,y:threeY,name:children[j].name,source:source})
-        // xy.push(this.deflectionXY(zeroX,zeroY,threeX,threeY,children[j].name,angle,flex,source))
-        num3++;
+  methods: {
+    // 模拟二维数据 
+     init() {
+      const allArr = []
+      for (let i = 1; i <= 31; i++) {
+        const obj = {
+          day: i,
+          id: i,
+          data: []
         }
-        //三级图标处理结束
-        num++;
+        const arr = []
+        for (let j = 0; j <= 24; j++) {
+          // notReportAble 不可上报 1  reported 已上报 2  occupied 已占用 3
+          let status = 0
+          if (j < 5) {
+            status = 1
+          } else if (j > 10 && j < 15) {
+            status = 2
+          } else if (j > 20) {
+            status = 3
+          }
+          const map = {
+            id: j + 1,
+            time: j,
+            status
+          }
+          arr.push(map)
+        }
+        obj.data = arr
+        allArr.push(obj)
       }
-      return xy;
+      console.log(allArr)
+      this.dataItem = allArr
+      this.leftTime = allArr[0]['data']
     },
-    deflectionXY(zX,zY,pX,pY,name,angle,flex,source){
-      //偏转后的X
-      let deflectionX=(zX - pX)*Math.cos(angle) - (zY - pY)*Math.sin(angle) + pX
-      //偏转后的Y
-      let deflectionY=(zX - pX)*Math.sin(angle) - (zY - pY)*Math.cos(angle) + pY
-      let point={
-        x:deflectionX,
-        y:deflectionY*flex,
-        name:name,
-        source
+    /**
+     * status 0 可上报 1 不可上报 2 已上报 3 已暂用 4 当前选中 5 取消上报
+     */
+    handleCurrentSelected(x, y) {
+      const status = this.dataItem[x].data[y].status // 当前状态
+      // this.dataItem[x].data[y].selected = !this.dataItem[x].data[y].selected
+      if (status == 0) {
+        this.dataItem[x].data[y].status = 4
+        return
       }
-      return point;
+      if (status == 4) {
+        this.dataItem[x].data[y].status = 0
+        return
+      }
+      if (status == 2) {
+        this.dataItem[x].data[y].status = 5
+        return
+      }
+      if (status == 5) {
+        this.dataItem[x].data[y].status = 2
+        return
+      }
+    },
+    handleMouseDown(event) {
+      // 0 左键 2 右键
+      console.log(event.button)
+      this.positionList.is_show_mask = true
+      this.positionList.start_x = event.clientX
+      this.positionList.start_y = event.clientY
+      this.positionList.end_x = event.clientX
+      this.positionList.end_y = event.clientY
+      this.positionList.box_screen_left = document.querySelector('.bottom').getBoundingClientRect().left
+      this.positionList.box_screen_top = document.querySelector('.bottom').getBoundingClientRect().top
+      document.body.addEventListener('mousemove', this.handleMouseMove) // 监听鼠标移动事件
+      document.body.addEventListener('mouseup', this.handleMouseUp) // 监听鼠标抬起事件
+    },
+    handleMouseMove(event) {
+      this.positionList.end_x = event.clientX
+      this.positionList.end_y = event.clientY
+    },
+    handleMouseUp(event) {
+      document.body.removeEventListener('mousemove', this.handleMouseMove)
+      document.body.removeEventListener('mouseup', this.handleMouseUp)
+      this.positionList.is_show_mask = false
+      this.handleDomSelect()
+      this.resSetXY()
+    },
+    handleDomSelect() {
+      const dom_mask = window.document.querySelector('.mask')
+      // getClientRects()方法 每一个盒子的边界矩形的矩形集合
+      const rect_select = dom_mask.getClientRects()[0]
+      document.querySelectorAll('.select-item').forEach((node, index) => {
+        const rects = node.getClientRects()[0]
+        if (this.collide(rects, rect_select) === true) {
+          const x = node.getAttribute('x')
+          const y = node.getAttribute('y')
+          // 当前选中
+          this.handleCurrentSelected(x, y)
+          // this.dataItem[x].data[y].selected = !this.dataItem[x].data[y].selected
+        }
+      })
+    },
+    collide(rect1, rect2) {
+      const maxX = Math.max(rect1.x + rect1.width, rect2.x + rect2.width)
+      const maxY = Math.max(rect1.y + rect1.height, rect2.y + rect2.height)
+      const minX = Math.min(rect1.x, rect2.x)
+      const minY = Math.min(rect1.y, rect2.y)
+      return maxX - minX <= rect1.width + rect2.width && maxY - minY <= rect1.height + rect2.height
+    },
+    resSetXY() {
+      this.positionList.start_x = 0
+      this.positionList.start_y = 0
+      this.positionList.end_x = 0
+      this.positionList.end_y = 0
+    },
+  }
+}
+
+</script>
+<style  lang="scss" scope >
+
+.container {
+  background: #fff;
+  .notReportAble {
+    background: #f3f3f3;
+  }
+  .reported {
+    background: #5573e9;
+  }
+  .occupied {
+    background: #ffefdd;
+  }
+  .currentlySelected {
+    background: #a0b1f3;
+  }
+  .cancelReporting {
+    background: #ff4949;
+  }
+  .btn {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    .btn-left {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      .btn-item {
+        display: flex;
+        flex-direction: row;
+        font-size: 14px;
+        align-items: center;
+        margin-left: 20px;
+        .circle {
+          width: 15px;
+          height: 15px;
+          border: 1px solid #d7e2ff;
+          margin-right: 10px;
+        }
+      }
+      .item {
+        width: 100px;
+        height: 28px;
+        line-height: 28px;
+        text-align: center;
+        border: 1px solid #d7e2ff;
+        cursor: pointer;
+      }
+      .reportAble {
+        background: #fff;
+      }
+    }
+  }
+  .wrap {
+    display: flex;
+    flex-direction: row;
+    border: 1px solid #d7e2ff;
+    border-bottom: 0;
+    align-items: flex-start;
+    .left {
+      overflow: hidden;
+      width: 60px;
+      .merge-column {
+        width: 100%;
+        height: 30px;
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+        border-right: 1px solid #d7e2ff;
+        border-bottom: 1px solid #d7e2ff;
+        position: relative;
+        &::before {
+          content: "";
+          position: absolute;
+          width: 1px;
+          height: 65px;
+          top: 0;
+          left: 0;
+          background-color: #d7e2ff;
+          display: block;
+          transform: rotate(-63deg);
+          transform-origin: top;
+          -ms-transform: rotate(-63deg);
+          -ms-transform-origin: top;
+        }
+        .title1 {
+          position: absolute;
+          top: 2px;
+          right: 2px;
+        }
+        .title2 {
+          position: absolute;
+          top: 14px;
+          left: 2px;
+        }
+      }
+      .td-title {
+        height: calc((100vh - 260px)/24);
+        line-height: calc((100vh - 260px)/24);
+        text-align: center;
+        border-right: 1px solid #d7e2ff;
+        border-bottom: 1px solid #d7e2ff;
+      }
+      &:last-child {
+        border-bottom: 0;
+      }
+    }
+    .right {
+      flex: 1;
+      display: flex;
+      flex-wrap: wrap;
+      .top {
+        width: 100%;
+        height: 30px;
+        display: flex;
+        flex-wrap: wrap;
+        align-content: flex-start;
+        overflow: hidden;
+        .day {
+          flex: 1;
+          height: 30px;
+          line-height: 30px;
+          text-align: center;
+          border-right: 1px solid #d7e2ff;
+          border-bottom: 1px solid #d7e2ff;
+        }
+      }
+      .bottom {
+        width: 100%;
+        height: calc(100vh - 260px);
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        user-select: none;
+        .mask {
+          position: absolute;
+          background: #409eff;
+          opacity: 0.4;
+          z-index: 100;
+          left: 0;
+          top: 0;
+        }
+        .area {
+          width: 100%;
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          align-content: flex-start;
+          .area-item {
+            flex: 1;
+          }
+        }
+        .select-item {
+          width: 100%;
+          height: calc((100vh - 260px)/24);
+          cursor: pointer;
+          border-right: 1px solid #d7e2ff;
+          border-bottom: 1px solid #d7e2ff;
+        }
+      }
     }
   }
 }
-</script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h1, h2 {
-  font-weight: normal;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
- ul {
-      list-style: none;
-      padding: 0;
-      margin: 0 auto;
-      
-    }
-    li,
-      a {
-        display: block;
-        height: 30px;
-        line-height: 30px;
-        display: flex;
-        justify-content: space-between;
-        font-size: 15px;
-      }
-.hello{
-   height: 270px;
-    width: 360px;
-    margin: 0 auto;
-    overflow: hidden;
-    clear: both;
-    overflow: hidden;
-   
-}
+
 </style>
